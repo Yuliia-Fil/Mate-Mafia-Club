@@ -16,6 +16,32 @@ def create_event(db: Session, title: str, description: str, date: datetime, type
 def get_events(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Event).offset(skip).limit(limit).all()
 
+# --- Оновлення події ---
+def update_event(db: Session, event_id: int, title: str = None, description: str = None, date: datetime = None, type: str = None):
+    event = db.query(models.Event).filter(models.Event.id == event_id).first()
+    if not event:
+        return None
+    if title:
+        event.title = title
+    if description:
+        event.description = description
+    if date:
+        event.date = date
+    if type:
+        event.type = type
+    db.commit()
+    db.refresh(event)
+    return event
+
+# --- Видалення події ---
+def delete_event(db: Session, event_id: int):
+    event = db.query(models.Event).filter(models.Event.id == event_id).first()
+    if not event:
+        return None
+    db.delete(event)
+    db.commit()
+    return event
+
 # --- Гравці ---
 def create_player(db: Session, username: str, email: str, password: str):
     hashed_password = pwd_context.hash(password)
@@ -28,6 +54,28 @@ def create_player(db: Session, username: str, email: str, password: str):
 def get_players(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Player).offset(skip).limit(limit).all()
 
+def update_player(db: Session, player_id: int, username: str = None, email: str = None, password: str = None):
+    player = db.query(models.Player).filter(models.Player.id == player_id).first()
+    if not player:
+        return None
+    if username:
+        player.username = username
+    if email:
+        player.email = email
+    if password:
+        player.password_hash = pwd_context.hash(password)
+    db.commit()
+    db.refresh(player)
+    return player
+
+def delete_player(db: Session, player_id: int):
+    player = db.query(models.Player).filter(models.Player.id == player_id).first()
+    if not player:
+        return None
+    db.delete(player)
+    db.commit()
+    return player
+
 # --- Медіа ---
 def create_media(db: Session, filename: str, file_type: str, url: str, description: str = None):
     db_media = models.Media(filename=filename, file_type=file_type, url=url, description=description)
@@ -38,6 +86,30 @@ def create_media(db: Session, filename: str, file_type: str, url: str, descripti
 
 def get_media(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Media).offset(skip).limit(limit).all()
+
+def update_media(db: Session, media_id: int, filename: str = None, file_type: str = None, url: str = None, description: str = None):
+    media = db.query(models.Media).filter(models.Media.id == media_id).first()
+    if not media:
+        return None
+    if filename:
+        media.filename = filename
+    if file_type:
+        media.file_type = file_type
+    if url:
+        media.url = url
+    if description:
+        media.description = description
+    db.commit()
+    db.refresh(media)
+    return media
+
+def delete_media(db: Session, media_id: int):
+    media = db.query(models.Media).filter(models.Media.id == media_id).first()
+    if not media:
+        return None
+    db.delete(media)
+    db.commit()
+    return media
 
 # --- Правила ---
 def create_rule(db: Session, title: str, description: str = None, pdf_filename: str = None, image_filename: str = None):
@@ -50,6 +122,30 @@ def create_rule(db: Session, title: str, description: str = None, pdf_filename: 
 def get_rules(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Rule).offset(skip).limit(limit).all()
 
+def update_rule(db: Session, rule_id: int, title: str = None, description: str = None, pdf_filename: str = None, image_filename: str = None):
+    rule = db.query(models.Rule).filter(models.Rule.id == rule_id).first()
+    if not rule:
+        return None
+    if title:
+        rule.title = title
+    if description:
+        rule.description = description
+    if pdf_filename:
+        rule.pdf_filename = pdf_filename
+    if image_filename:
+        rule.image_filename = image_filename
+    db.commit()
+    db.refresh(rule)
+    return rule
+
+def delete_rule(db: Session, rule_id: int):
+    rule = db.query(models.Rule).filter(models.Rule.id == rule_id).first()
+    if not rule:
+        return None
+    db.delete(rule)
+    db.commit()
+    return rule
+
 # --- Картки ---
 def create_card(db: Session, id: str, name: str, description: str, quantity: int, team: str, img: str = None):
     db_card = models.Card(id=id, name=name, description=description, quantity=quantity, team=team, img=img)
@@ -60,3 +156,29 @@ def create_card(db: Session, id: str, name: str, description: str, quantity: int
 
 def get_cards(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Card).offset(skip).limit(limit).all()
+
+def update_card(db: Session, card_id: str, name: str = None, description: str = None, quantity: int = None, team: str = None, img: str = None):
+    card = db.query(models.Card).filter(models.Card.id == card_id).first()
+    if not card:
+        return None
+    if name:
+        card.name = name
+    if description:
+        card.description = description
+    if quantity is not None:
+        card.quantity = quantity
+    if team:
+        card.team = team
+    if img:
+        card.img = img
+    db.commit()
+    db.refresh(card)
+    return card
+
+def delete_card(db: Session, card_id: str):
+    card = db.query(models.Card).filter(models.Card.id == card_id).first()
+    if not card:
+        return None
+    db.delete(card)
+    db.commit()
+    return card

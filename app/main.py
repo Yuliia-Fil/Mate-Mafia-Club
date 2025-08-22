@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, UploadFile, File
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from . import models, crud, database
 from .database import engine
@@ -51,6 +52,21 @@ def create_event(event: EventCreate, db: Session = Depends(get_db)):
 def list_events(db: Session = Depends(get_db)):
     return crud.get_events(db)
 
+@app.put("/events/{event_id}")
+def update_event_endpoint(event_id: int, event: EventCreate, db: Session = Depends(get_db)):
+    updated = crud.update_event(db, event_id, event.title, event.description, event.date, event.type)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return updated
+
+# Delete
+@app.delete("/events/{event_id}")
+def delete_event_endpoint(event_id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_event(db, event_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Event not found")
+    return {"detail": "Event deleted"}
+
 # --- Ендпоїнти гравців ---
 @app.post("/players/")
 def create_player(player: PlayerCreate, db: Session = Depends(get_db)):
@@ -59,6 +75,20 @@ def create_player(player: PlayerCreate, db: Session = Depends(get_db)):
 @app.get("/players/")
 def list_players(db: Session = Depends(get_db)):
     return crud.get_players(db)
+
+@app.put("/players/{player_id}")
+def update_player_endpoint(player_id: int, player: PlayerCreate, db: Session = Depends(get_db)):
+    updated = crud.update_player(db, player_id, player.username, player.email, player.password)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return updated
+
+@app.delete("/players/{player_id}")
+def delete_player_endpoint(player_id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_player(db, player_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return {"detail": "Player deleted"}
 
 # --- Ендпоїнти медіа ---
 @app.post("/media/")
@@ -72,6 +102,20 @@ def upload_media(description: str = None, file: UploadFile = File(...), db: Sess
 @app.get("/media/")
 def list_media(db: Session = Depends(get_db)):
     return crud.get_media(db)
+
+@app.put("/media/{media_id}")
+def update_media_endpoint(media_id: int, description: str = None, db: Session = Depends(get_db)):
+    updated = crud.update_media(db, media_id, description=description)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Media not found")
+    return updated
+
+@app.delete("/media/{media_id}")
+def delete_media_endpoint(media_id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_media(db, media_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Media not found")
+    return {"detail": "Media deleted"}
 
 # --- Ендпоїнти правил ---
 @app.post("/rules/")
@@ -98,6 +142,20 @@ def upload_rule(title: str, description: str = None,
 def list_rules(db: Session = Depends(get_db)):
     return crud.get_rules(db)
 
+@app.put("/rules/{rule_id}")
+def update_rule_endpoint(rule_id: int, title: str = None, description: str = None, db: Session = Depends(get_db)):
+    updated = crud.update_rule(db, rule_id, title=title, description=description)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Rule not found")
+    return updated
+
+@app.delete("/rules/{rule_id}")
+def delete_rule_endpoint(rule_id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_rule(db, rule_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Rule not found")
+    return {"detail": "Rule deleted"}
+
 # --- Ендпоїнти карток ---
 @app.post("/cards/")
 def create_card(card: CardCreate, db: Session = Depends(get_db)):
@@ -106,6 +164,20 @@ def create_card(card: CardCreate, db: Session = Depends(get_db)):
 @app.get("/cards/")
 def list_cards(db: Session = Depends(get_db)):
     return crud.get_cards(db)
+
+@app.put("/cards/{card_id}")
+def update_card_endpoint(card_id: str, card: CardCreate, db: Session = Depends(get_db)):
+    updated = crud.update_card(db, card_id, card.name, card.description, card.quantity, card.team, card.img)
+    if not updated:
+        raise HTTPException(status_code=404, detail="Card not found")
+    return updated
+
+@app.delete("/cards/{card_id}")
+def delete_card_endpoint(card_id: str, db: Session = Depends(get_db)):
+    deleted = crud.delete_card(db, card_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Card not found")
+    return {"detail": "Card deleted"}
 
 @app.post("/game/start")
 def start_game(player_ids: list[int], db: Session = Depends(get_db)):
