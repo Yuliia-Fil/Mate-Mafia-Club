@@ -1,10 +1,18 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
+import { BrowserRouter as Router } from "react-router-dom";
+import { App } from "./App.tsx";
+import { ThemeProvider } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
+import { theme } from "./theme.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </Router>
   </StrictMode>
 );
