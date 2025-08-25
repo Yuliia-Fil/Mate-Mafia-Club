@@ -1,32 +1,99 @@
-import { Box, Select, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { EventCard } from "./EventCard";
-import { useEffect, useState } from "react";
-type Event = {
-  title: "string";
-  description: "string";
-  date: "2025-08-25T12:56:52.794Z";
-  type: "string";
-};
+import { theme } from "../theme";
+import sortSelect from "../assets/sortSelect.svg";
+// import { useEffect, useState } from "react";
+
+// type Event = {
+//   title: "string";
+//   description: "string";
+//   date: "2025-08-25T12:56:52.794Z";
+//   type: "string";
+// };
+
+const events = [
+  {
+    title: "Мафіозний марафон",
+    description:
+      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+    date: "10 жовтня, 2025",
+    img: "/assets/testEventImg.png",
+  },
+  {
+    title: "Мафіозний марафон",
+    description:
+      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+    date: "10 жовтня, 2025",
+    img: "/assets/testEventImg.png",
+  },
+  {
+    title: "Мафіозний марафон",
+    description:
+      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+    date: "10 жовтня, 2025",
+    img: "/assets/testEventImg.png",
+  },
+  {
+    title: "Мафіозний марафон",
+    description:
+      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+    date: "10 жовтня, 2025",
+    img: "/assets/testEventImg.png",
+  },
+];
 
 export const Events = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  //   const [events, setEvents] = useState<Event[]>([]);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/events")
-      .then((res) => res.json())
-      .then(setEvents)
-      .catch(console.log);
-  }, []);
+  //   useEffect(() => {
+  //     fetch("http://127.0.0.1:8000/events")
+  //       .then((res) => res.json())
+  //       .then(setEvents)
+  //       .catch(console.log);
+  //   }, []);
 
   return (
     <Box>
-      <Box>
-        <TextField></TextField>
-        <Select></Select>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <TextField
+          variant="filled"
+          sx={{
+            width: "214px",
+            height: "45px",
+            borderRadius: "1000px",
+            bgcolor: theme.palette.background.paper,
+          }}
+        ></TextField>
+
+        <Button
+          sx={{
+            width: "91px",
+            height: "40px",
+            borderRadius: "1000px",
+          }}
+          variant="contained"
+          onClick={() => {}}
+        >
+          <img src={sortSelect}></img>
+        </Button>
       </Box>
-      <Box>
-        {events.map(() => (
-          <EventCard />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "300px",
+          marginTop: "80px",
+        }}
+      >
+        {events.map((event) => (
+          <EventCard key={event.title} />
         ))}
       </Box>
     </Box>

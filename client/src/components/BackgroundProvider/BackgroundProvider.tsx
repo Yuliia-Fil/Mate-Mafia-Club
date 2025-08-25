@@ -76,9 +76,9 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
 
   useLayoutEffect(() => {
     if (containerRef.current) {
-      const height = containerRef.current.getBoundingClientRect().height;
+      const height = document.documentElement.scrollHeight;
       setElipses(createElipses(height));
-      console.log(height, containerRef.current);
+      console.log(height);
     }
   }, []);
 
@@ -102,7 +102,6 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
             key={el.top}
             sx={{
               position: "absolute",
-              zIndex: 500,
               top: el.top,
               left: el.left,
               width: "476px",

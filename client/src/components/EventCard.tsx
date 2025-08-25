@@ -63,6 +63,7 @@ export const EventCard = () => {
           right: 10,
           width: "450px",
           height: "350px",
+          zIndex: 3,
         }}
       />
 
@@ -78,6 +79,7 @@ export const EventCard = () => {
           height: "950px",
           transform: "rotateX(60deg)",
           opacity: 0.8,
+          zIndex: 3,
         }}
       />
 
@@ -92,6 +94,7 @@ export const EventCard = () => {
           color: "#FAECEA",
           textTransform: "uppercase",
           maxWidth: "50%",
+          zIndex: 3,
         }}
       >
         {title}
