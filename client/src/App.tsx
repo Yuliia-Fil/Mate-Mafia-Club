@@ -3,6 +3,7 @@ import { BackgroundProvider } from "./components/BackgroundProvider/BackgroundPr
 import { Header } from "./components/Header";
 import { HomePage } from "./components/HomePage";
 import { paths } from "./path";
+import { EventCard } from "./components/EventCard";
 
 export const App = () => {
   return (
@@ -11,6 +12,7 @@ export const App = () => {
       <Routes>
         <Route path={paths.HOME} element={<HomePage />}></Route>
       </Routes>
+      <EventCard></EventCard>
     </BackgroundProvider>
   );
 };
