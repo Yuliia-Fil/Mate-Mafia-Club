@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { EventCard } from "./EventCard";
 import { theme } from "../theme";
 import sortSelect from "../assets/sortSelect.svg";
@@ -63,12 +63,34 @@ export const Events = () => {
         }}
       >
         <TextField
-          variant="filled"
+          variant="outlined"
+          placeholder="Пошук"
           sx={{
             width: "214px",
             height: "45px",
-            borderRadius: "1000px",
-            bgcolor: theme.palette.background.paper,
+            "& .MuiOutlinedInput-root": {
+              backgroundColor: theme.palette.background.paper,
+              borderRadius: "1000px",
+              "& fieldset": {
+                borderColor: "secondary", // 1px бордер
+              },
+              "&:hover fieldset": {
+                borderColor: "#999",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#666",
+              },
+            },
+            input: {
+              color: "text.primary",
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <img src={sortSelect} alt="" />
+              </InputAdornment>
+            ),
           }}
         ></TextField>
 
@@ -92,8 +114,8 @@ export const Events = () => {
           marginTop: "80px",
         }}
       >
-        {events.map((event) => (
-          <EventCard key={event.title} />
+        {events.map((_, index) => (
+          <EventCard key={index} />
         ))}
       </Box>
     </Box>

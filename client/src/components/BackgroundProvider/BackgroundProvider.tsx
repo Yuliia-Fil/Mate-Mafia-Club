@@ -3,7 +3,7 @@ import style from "./BackgroundProvider.module.scss";
 import { paths } from "../../path";
 import { Box } from "@mui/material";
 import { theme } from "../../theme";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 type BackgroundProps = {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ type Elips = {
 };
 
 const createElipses = (height: number): Elips[] => {
-  const elCount = Math.floor(height / 600);
+  const elCount = Math.floor(height / 250);
 
   const topR = 100;
   const topL = height * 0.12;
@@ -46,6 +46,8 @@ const createElipses = (height: number): Elips[] => {
     }
   });
 
+  console.log(elipses);
+
   return elipses;
 };
 
@@ -55,7 +57,6 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
   let cl = "";
   const needElipses =
     currentPath !== paths.HOME && currentPath !== paths.PLAYERS;
-  const containerRef = useRef<HTMLDivElement>(null);
 
   switch (currentPath) {
     case paths.HOME:
@@ -74,17 +75,14 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
       cl = "rules";
   }
 
-  useLayoutEffect(() => {
-    if (containerRef.current) {
-      const height = document.documentElement.scrollHeight;
-      setElipses(createElipses(height));
-      console.log(height);
-    }
-  }, []);
+  useEffect(() => {
+    const height = document.documentElement.scrollHeight;
+
+    setElipses(createElipses(height));
+  }, [currentPath]);
 
   return (
     <Box
-      ref={containerRef}
       className={style[cl]}
       sx={{
         minHeight: "100vh",
@@ -104,11 +102,11 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
               position: "absolute",
               top: el.top,
               left: el.left,
-              width: "476px",
-              height: "428px",
+              width: "300px",
+              height: "250px",
               bgcolor: "#EEBCAF66",
               borderRadius: "100%",
-              filter: "blur(500px)",
+              filter: "blur(150px)",
             }}
           ></Box>
         ))}

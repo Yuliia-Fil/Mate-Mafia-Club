@@ -11,6 +11,10 @@ export const theme = createTheme({
       main: "#FFFFFF",
     },
 
+    secondary: {
+      main: "#62626280", // рамка інпутів
+    },
+
     action: {
       active: "#844831",
       hover: "#B76547",
