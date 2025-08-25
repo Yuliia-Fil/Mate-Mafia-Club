@@ -3,12 +3,7 @@ import { NavLink } from "react-router-dom";
 import { theme } from "../theme";
 import Logo from "../assets/logo.svg";
 import MMC from "../assets/mmc.svg";
-
-const navLinks = [
-  { title: "Події", href: "/events" },
-  { title: "Правила та ролі", href: "/rules" },
-  { title: "Гравці", href: "/players" },
-];
+import { navLinks } from "../constants";
 
 export const Header = () => {
   return (

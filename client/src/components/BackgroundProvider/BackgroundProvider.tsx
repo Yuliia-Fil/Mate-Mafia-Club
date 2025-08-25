@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
 import style from "./BackgroundProvider.module.scss";
-import { paths } from "../../path";
 import { Box } from "@mui/material";
 import { theme } from "../../theme";
 import { useEffect, useState } from "react";
+import { paths } from "../../constants";
 
 type BackgroundProps = {
   children: React.ReactNode;
@@ -15,13 +15,13 @@ type Elips = {
 };
 
 const createElipses = (height: number): Elips[] => {
-  const elCount = Math.floor(height / 250);
+  const elCount = Math.floor(height / 650);
 
   const topR = 100;
-  const topL = height * 0.12;
-  const topM = height * 0.27;
-  const topIncrement = 0.3 * height;
-  const topMIncrement = 0.5 * height;
+  const topL = height * 0.1;
+  const topM = height * 0.2;
+  const topIncrement = 0.25 * height;
+  const topMIncrement = 0.4 * height;
 
   const elipses = Array.from({ length: elCount }, (_, index) => {
     const n = (index + 3) % 3;
@@ -45,8 +45,6 @@ const createElipses = (height: number): Elips[] => {
       };
     }
   });
-
-  console.log(elipses);
 
   return elipses;
 };

@@ -2,6 +2,8 @@ import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { EventCard } from "./EventCard";
 import { theme } from "../theme";
 import sortSelect from "../assets/sortSelect.svg";
+import search from "../assets/search.svg";
+
 // import { useEffect, useState } from "react";
 
 // type Event = {
@@ -11,44 +13,16 @@ import sortSelect from "../assets/sortSelect.svg";
 //   type: "string";
 // };
 
-const events = [
-  {
-    title: "Мафіозний марафон",
-    description:
-      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
-    date: "10 жовтня, 2025",
-    img: "/assets/testEventImg.png",
-  },
-  {
-    title: "Мафіозний марафон",
-    description:
-      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
-    date: "10 жовтня, 2025",
-    img: "/assets/testEventImg.png",
-  },
-  {
-    title: "Мафіозний марафон",
-    description:
-      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
-    date: "10 жовтня, 2025",
-    img: "/assets/testEventImg.png",
-  },
-  {
-    title: "Мафіозний марафон",
-    description:
-      "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
-    date: "10 жовтня, 2025",
-    img: "/assets/testEventImg.png",
-  },
-];
-
 export const Events = () => {
   //   const [events, setEvents] = useState<Event[]>([]);
 
   //   useEffect(() => {
   //     fetch("http://127.0.0.1:8000/events")
   //       .then((res) => res.json())
-  //       .then(setEvents)
+  //       .then((res) => {
+  //         console.log(res);
+  //         setEvents(res);
+  //       })
   //       .catch(console.log);
   //   }, []);
 
@@ -64,35 +38,38 @@ export const Events = () => {
       >
         <TextField
           variant="outlined"
-          placeholder="Пошук"
+          placeholder="Пошук..."
           sx={{
             width: "214px",
-            height: "45px",
             "& .MuiOutlinedInput-root": {
+              height: "45px",
               backgroundColor: theme.palette.background.paper,
               borderRadius: "1000px",
+              boxSizing: "border-box",
               "& fieldset": {
-                borderColor: "secondary", // 1px бордер
+                borderColor: theme.palette.text.secondary,
               },
-              "&:hover fieldset": {
-                borderColor: "#999",
+              "& input": {
+                padding: "0 8px",
+                color: theme.palette.text.primary,
+                "&::placeholder": {
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "16px",
+                  fontWeight: 400,
+                  color: theme.palette.text.primary,
+                  opacity: 1,
+                },
               },
-              "&.Mui-focused fieldset": {
-                borderColor: "#666",
-              },
-            },
-            input: {
-              color: "text.primary",
             },
           }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <img src={sortSelect} alt="" />
+                <img src={search} />
               </InputAdornment>
             ),
           }}
-        ></TextField>
+        />
 
         <Button
           sx={{
@@ -111,10 +88,10 @@ export const Events = () => {
           display: "flex",
           flexDirection: "column",
           gap: "300px",
-          marginTop: "80px",
+          margin: "80px 0",
         }}
       >
-        {events.map((_, index) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
           <EventCard key={index} />
         ))}
       </Box>

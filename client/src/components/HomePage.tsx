@@ -1,9 +1,6 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
-import facebook from "../assets/facebook.svg";
-import telegram from "../assets/telegram.svg";
-import instagram from "../assets/instagram.svg";
 import { NavLink } from "react-router-dom";
-import { paths } from "../path";
+import { iconLinks, paths } from "../constants";
 
 export const HomePage = () => {
   return (
@@ -61,67 +58,29 @@ export const HomePage = () => {
           bottom: "40px",
         }}
       >
-        <IconButton
-          component="a"
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="primary"
-          sx={{
-            transition: "all 0.3s ease",
-            "&:hover": {
-              boxShadow: "0 0 8px #ffffff80",
-              transform: "scale(1.1)",
-            },
-          }}
-        >
-          <img
-            src={facebook}
-            alt={facebook}
-            style={{ width: 24, height: 24 }}
-          />
-        </IconButton>
-
-        <IconButton
-          component="a"
-          href="https://twitter.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="primary"
-          sx={{
-            transition: "all 0.3s ease",
-            "&:hover": {
-              boxShadow: "0 0 8px #ffffff80",
-              transform: "scale(1.1)",
-            },
-          }}
-        >
-          <img
-            src={telegram}
-            alt={telegram}
-            style={{ width: 24, height: 24 }}
-          />
-        </IconButton>
-
-        <IconButton
-          component="a"
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            transition: "all 0.3s ease",
-            "&:hover": {
-              boxShadow: "0 0 8px #ffffff80",
-              transform: "scale(1.1)",
-            },
-          }}
-        >
-          <img
-            src={instagram}
-            alt={instagram}
-            style={{ width: 24, height: 24 }}
-          />
-        </IconButton>
+        {iconLinks.map((link) => {
+          return (
+            <IconButton
+              key={link.href}
+              component="a"
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              color="primary"
+              sx={{
+                transition: "all 0.3s ease",
+                width: "24px",
+                height: "24px",
+                "&:hover": {
+                  boxShadow: "0 0 8px #ffffff80",
+                  transform: "scale(1.1)",
+                },
+              }}
+            >
+              <img src={link.src} />
+            </IconButton>
+          );
+        })}
       </Box>
     </Box>
   );
