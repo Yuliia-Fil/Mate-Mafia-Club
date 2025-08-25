@@ -7,6 +7,10 @@ export const theme = createTheme({
       secondary: "#FFFFFF80",
     },
 
+    primary: {
+      main: "#FFFFFF",
+    },
+
     action: {
       active: "#844831",
       hover: "#B76547",
@@ -39,6 +43,7 @@ export const theme = createTheme({
     },
 
     body1: { fontWeight: 400, fontSize: "20px", lineHeight: 1 },
+    body2: { fontWeight: 300, fontSize: "24px", lineHeight: 1 },
 
     button: {
       fontFamily: "'Inter', sans-serif",

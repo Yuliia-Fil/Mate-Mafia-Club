@@ -12,14 +12,7 @@ const navLinks = [
 
 export const Header = () => {
   return (
-    <AppBar
-      position="sticky"
-      color="transparent"
-      elevation={0}
-      sx={{
-        padding: "48px 160px 0",
-      }}
-    >
+    <AppBar position="static" color="transparent" elevation={0}>
       <Box
         sx={{
           display: "flex",
