@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
-import { paths } from "../path";
 import { useEffect, useState } from "react";
+import { pageTitles } from "../constants";
 
 type Props = {
   path: string;
@@ -12,29 +12,11 @@ type Page = {
   subtitle: string;
 };
 
-const data = [
-  {
-    path: paths.EVENTS,
-    title: "Події",
-    subtitle: "Тут ви знайдете всі заплановані ігри та зустрічі клубу",
-  },
-  {
-    path: paths.PLAYERS,
-    title: "Гравці",
-    subtitle: "Знайомтеся з гравцями та учасниками нашого клубу",
-  },
-  {
-    path: paths.RULES,
-    title: "Ролі",
-    subtitle: "Кожна роль має унікальні можливості та впливає на перебіг гри",
-  },
-];
-
 export const PageTitle = ({ path }: Props) => {
   const [page, setPage] = useState<Page | null>(null);
 
   useEffect(() => {
-    const currentPage = data.find((p) => p.path === path) || null;
+    const currentPage = pageTitles.find((p) => p.path === path) || null;
     setPage(currentPage);
   }, [path]);
 
