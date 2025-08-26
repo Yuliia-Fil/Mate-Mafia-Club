@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer";
 import { paths } from "./constants";
 import { PlayersPage } from "./components/PlayersPage";
 import { GamePage } from "./components/GamePage";
+import { RulesPage } from "./components/RulesPage";
 
 export const App = () => {
   const path = useLocation().pathname;
@@ -21,6 +22,7 @@ export const App = () => {
         <Route path={paths.EVENTS} element={<EventsPage />}></Route>
         <Route path={paths.PLAYERS} element={<PlayersPage />}></Route>
         <Route path={paths.GAME} element={<GamePage />}></Route>
+        <Route path={paths.RULES} element={<RulesPage />}></Route>
       </Routes>
       <Footer path={path} />
     </BackgroundProvider>
