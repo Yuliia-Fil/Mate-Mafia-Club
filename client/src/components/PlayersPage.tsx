@@ -1,31 +1,10 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
-import { EventCard } from "./EventCard";
 import { theme } from "../theme";
-import sortSelect from "../assets/sortSelect.svg";
 import search from "../assets/search.svg";
+import sortSelect from "../assets/sortSelect.svg";
+import { PlayerCard } from "./PlayerCard";
 
-// import { useEffect, useState } from "react";
-
-// type Event = {
-//   title: "string";
-//   description: "string";
-//   date: "2025-08-25T12:56:52.794Z";
-//   type: "string";
-// };
-
-export const EventsPage = () => {
-  //   const [events, setEvents] = useState<Event[]>([]);
-
-  //   useEffect(() => {
-  //     fetch("http://127.0.0.1:8000/events")
-  //       .then((res) => res.json())
-  //       .then((res) => {
-  //         console.log(res);
-  //         setEvents(res);
-  //       })
-  //       .catch(console.log);
-  //   }, []);
-
+export const PlayersPage = () => {
   return (
     <Box>
       <Box
@@ -85,14 +64,15 @@ export const EventsPage = () => {
       </Box>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "300px",
-          margin: "80px 0",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          columnGap: "16px",
+          rowGap: "40px",
+          marginTop: "40px",
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
-          <EventCard key={index} />
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
+          <PlayerCard key={index} />
         ))}
       </Box>
     </Box>

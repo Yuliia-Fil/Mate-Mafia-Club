@@ -18,7 +18,7 @@ const createElipses = (height: number): Elips[] => {
   const elCount = Math.floor(height / 650);
 
   const topR = 100;
-  const topL = height * 0.1;
+  const topL = Math.max(height * 0.1, 650);
   const topM = height * 0.2;
   const topIncrement = 0.25 * height;
   const topMIncrement = 0.4 * height;
@@ -53,8 +53,7 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
   const currentPath = useLocation().pathname;
   const [elipses, setElipses] = useState<Elips[]>([]);
   let cl = "";
-  const needElipses =
-    currentPath !== paths.HOME && currentPath !== paths.PLAYERS;
+  const needElipses = currentPath !== paths.HOME;
 
   switch (currentPath) {
     case paths.HOME:

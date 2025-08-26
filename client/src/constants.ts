@@ -2,6 +2,7 @@ import facebook from "./assets/facebook.svg";
 import telegram from "./assets/telegram.svg";
 import instagram from "./assets/instagram.svg";
 import citizen from "./assets/citizen.png";
+import player from "./assets/testRoleImg.jpg";
 
 export const paths = {
   HOME: "/",
@@ -46,4 +47,10 @@ export const testRole = {
   description:
     "Прокидається лише у фазу дня, не має нічних дій. Активно шукає мафію та будує червону команду.",
   img: citizen,
+};
+
+export const testPlayer = {
+  nickName: "Леді Інтрига",
+  name: "Марія Клин",
+  img: player,
 };
