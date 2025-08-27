@@ -6,8 +6,8 @@ from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # --- Події ---
-def create_event(db: Session, title: str, description: str, date: datetime, type: str = None):
-    db_event = models.Event(title=title, description=description, date=date, type=type)
+def create_event(db: Session, title: str, description: str, date: datetime, type: str, imgUrl: str):
+    db_event = models.Event(title=title, description=description, date=date, type=type, imgUrl=imgUrl)
     db.add(db_event)
     db.commit()
     db.refresh(db_event)
@@ -17,7 +17,7 @@ def get_events(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Event).offset(skip).limit(limit).all()
 
 # --- Оновлення події ---
-def update_event(db: Session, event_id: int, title: str = None, description: str = None, date: datetime = None, type: str = None):
+def update_event(db: Session, event_id: int, title: str, description: str, date: datetime, type: str, imgUrl: str):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
     if not event:
         return None
@@ -29,6 +29,8 @@ def update_event(db: Session, event_id: int, title: str = None, description: str
         event.date = date
     if type:
         event.type = type
+    if imgUrl:
+        event.imgUrl = imgUrl
     db.commit()
     db.refresh(event)
     return event

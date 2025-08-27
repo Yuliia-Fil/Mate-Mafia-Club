@@ -39,6 +39,7 @@ class EventBase(BaseModel):
     description: str | None = None
     date: datetime
     type: str | None = None
+    imgUrl: str | None = None
 
 class Event(EventBase):
     id: int
@@ -89,7 +90,7 @@ class Rule(BaseModel):
 # --- Ендпоінти подій ---
 @app.post("/events/", response_model=Event)
 def create_event(event: EventBase, db: Session = Depends(get_db)):
-    return crud.create_event(db, event.title, event.description, event.date, event.type)
+    return crud.create_event(db, event.title, event.description, event.date, event.type, event.imgUrl)
 
 @app.get("/events/", response_model=list[Event])
 def list_events(db: Session = Depends(get_db)):
@@ -97,7 +98,7 @@ def list_events(db: Session = Depends(get_db)):
 
 @app.put("/events/{event_id}", response_model=Event)
 def update_event_endpoint(event_id: int, event: EventBase, db: Session = Depends(get_db)):
-    updated = crud.update_event(db, event_id, event.title, event.description, event.date, event.type)
+    updated = crud.update_event(db, event_id, event.title, event.description, event.date, event.type, event.imgUrl)
     if not updated:
         raise HTTPException(status_code=404, detail="Event not found")
     return updated
