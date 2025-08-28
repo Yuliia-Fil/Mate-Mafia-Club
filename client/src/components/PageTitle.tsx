@@ -40,6 +40,7 @@ export const PageTitle = ({ path }: Props) => {
           sx={{
             width: "547px",
             textAlign: "center",
+            lineHeight: 1.4,
           }}
         >
           {page.subtitle}

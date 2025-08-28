@@ -61,9 +61,11 @@ export const RulesPage = () => {
               </Box>
             </AccordionSummary>
             <AccordionDetails>
-              <ul>
+              <ul style={{ gap: "8px" }}>
                 {rule.description.map((r) => (
-                  <li key={r}>{r}</li>
+                  <li style={{ lineHeight: "1.4" }} key={r}>
+                    {r}
+                  </li>
                 ))}
               </ul>
             </AccordionDetails>
