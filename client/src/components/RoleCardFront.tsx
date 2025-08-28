@@ -6,9 +6,9 @@ import {
   Typography,
   type TooltipProps,
 } from "@mui/material";
-import { paths, testRole } from "../constants";
+import { testRole } from "../constants";
 import styled from "@emotion/styled";
-import { useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -20,14 +20,30 @@ const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 });
 
-export const RoleCard = () => {
-  const path = useLocation().pathname;
-  const showDescription = path === paths.RULES;
+export const RoleCardFront = ({
+  activeIndex,
+  index,
+}: {
+  index: number;
+  activeIndex?: number;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+  const showDescription = activeIndex === index;
+
+  useEffect(() => {
+    if (cardRef.current) {
+      const width = cardRef.current.offsetWidth;
+      setOffsetX(width * 0.5);
+      const height = cardRef.current.offsetHeight;
+      setOffsetY(height * -0.35);
+    }
+  }, []);
 
   const cardContent = (
     <Box
       sx={{
-        cursor: "pointer",
         width: "100%",
         maxWidth: "292px",
         minWidth: "164px",
@@ -86,17 +102,21 @@ export const RoleCard = () => {
           sx={{
             p: "24px",
             borderRadius: "12px",
+            borderBottomLeftRadius: 0,
             border: "2px solid #62626280",
             background: "linear-gradient(20deg, #292929 10%, #8484840D 100%)",
             boxShadow: "0px 4px 12px #00000040",
             color: "text.secondary",
             height: "144px",
             display: "flex",
+            textAlign: "center",
+            alignItems: "center",
           }}
         >
           <Typography variant="body1">{testRole.description}</Typography>
         </Box>
       }
+      followCursor
       slots={{
         transition: Fade,
       }}
@@ -108,15 +128,13 @@ export const RoleCard = () => {
           modifiers: [
             {
               name: "offset",
-              options: {
-                offset: [150, -150], // зміщення тултіпу від картки
-              },
+              options: { offset: [offsetX, offsetY] },
             },
           ],
         },
       }}
     >
-      {cardContent}
+      <div ref={cardRef}>{cardContent}</div>
     </CustomTooltip>
   ) : (
     cardContent

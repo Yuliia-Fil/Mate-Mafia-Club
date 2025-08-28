@@ -46,7 +46,7 @@ export const theme = createTheme({
       letterSpacing: "0%",
     },
 
-    body1: { fontWeight: 400, fontSize: "20px", lineHeight: 1 },
+    body1: { fontWeight: 400, fontSize: "20px", lineHeight: 1.2 },
     body2: { fontWeight: 300, fontSize: "24px", lineHeight: 1 },
 
     button: {
