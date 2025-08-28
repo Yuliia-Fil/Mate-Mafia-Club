@@ -26,6 +26,16 @@ def get_db():
     finally:
         db.close()
 
+cards_data = [
+    {"id": "don", "name": "Дон мафії", "description": "Назначає відстріли мафії кожної фази ночі. Може контролювати хід гри для чорної команди.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/don.png"},
+    {"id": "mafia", "name": "Мафія", "description": "Домовляється з Доном мафії про відстріли кожної фази ночі. Ключовий гравець чорної команди.", "quantity": 2, "team": "чорна", "imgUrl": "/uploads/mafia.png"},
+    {"id": "courtesan", "name": "Повія", "description": "Прокидається разом з усією мафією лише в першу фазу ночі. Може впливати на нічні дії.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/prostitute.png"},
+    {"id": "citizen", "name": "Мешканець", "description": "Прокидається лише у фазу дня, не має нічних дій. Сприяє розвитку комунікації та голосування.", "quantity": 5, "team": "червона", "imgUrl": "/uploads/inhabitant.png"},
+    {"id": "sherif", "name": "Шериф", "description": "Прокидається вночі у свою чергу. Запитує у ведучого колір команди кожного гравця.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/sheriff.png"},
+    {"id": "doctor", "name": "Лікар", "description": "Прокидається вночі у свою чергу. Може відмінити постріл Мафії, рятуючи гравців.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/doctor.png"},
+    {"id": "maniac", "name": "Маніяк", "description": "Прокидається вночі у свою чергу. Може відстрелити будь-якого гравця і впливати на хід гри.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/maniac.png"},
+]
+
 # --- Схеми Pydantic ---
 
 class EventBase(BaseModel):
@@ -180,7 +190,7 @@ def seed_all():
             "description": "Назначає відстріли мафії кожної фази ночі. Може контролювати хід гри для чорної команди.",
             "quantity": 1,
             "team": "чорна",
-            "imgUrl": "/uploads/don.png"
+            "imgUrl": "/uploads/don1.png"
         },
         {
             "id": "mafia",
@@ -188,7 +198,7 @@ def seed_all():
             "description": "Домовляється з Доном мафії про відстріли кожної фази ночі. Ключовий гравець чорної команди.",
             "quantity": 2,
             "team": "чорна",
-            "imgUrl": "/uploads/mafia.png"
+            "imgUrl": "/uploads/mafia1.png"
         },
         {
             "id": "courtesan",
@@ -196,7 +206,7 @@ def seed_all():
             "description": "Прокидається разом з усією мафією лише в першу фазу ночі. Може впливати на нічні дії.",
             "quantity": 1,
             "team": "чорна",
-            "imgUrl": "/uploads/prostitute.png"
+            "imgUrl": "/uploads/prostitute1.png"
         },
         {
             "id": "citizen",
@@ -204,7 +214,7 @@ def seed_all():
             "description": "Прокидається лише у фазу дня, не має нічних дій. Сприяє розвитку комунікації та голосування.",
             "quantity": 5,
             "team": "червона",
-            "imgUrl": "/uploads/inhabitant.png"
+            "imgUrl": "/uploads/inhabitant1.png"
         },
         {
             "id": "sherif",
@@ -212,7 +222,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Запитує у ведучого колір команди кожного гравця.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "/uploads/sheriff.png"
+            "imgUrl": "/uploads/sheriff1.png"
         },
         {
             "id": "doctor",
@@ -220,7 +230,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Може відмінити постріл Мафії, рятуючи гравців.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "/uploads/doctor.png"
+            "imgUrl": "/uploads/doctor1.png"
         },
         {
             "id": "maniac",
@@ -228,7 +238,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Може відстрелити будь-якого гравця і впливати на хід гри.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "/uploads/maniac.png"
+            "imgUrl": "/uploads/maniac1.png"
            }
     ]
 
@@ -440,20 +450,19 @@ def get_cards(request: Request, db: Session = Depends(get_db)):
     return cards
 
 @app.get("/cards/random/", response_model=List[Card])
-def get_random_cards(request: Request, db: Session = Depends(get_db)):
-    cards = crud.get_cards(db)  # отримуємо всі картки з БД
-    if len(cards) <= 12:
-        random_cards = cards.copy()
-        random.shuffle(random_cards)  # перемішуємо, якщо <=12
-    else:
-        random_cards = random.sample(cards, 12)  # випадкові 12 карток
-
-    # Формуємо повні URL для картинок
-    for card in random_cards:
-        if card.imgUrl:
-            card.imgUrl = str(request.base_url) + card.imgUrl.lstrip("/")
-
-    return random_cards
+def get_random_cards():
+    expanded = []
+    for c in cards_data:
+        expanded.extend([{
+            "id": c["id"],
+            "name": c["name"],
+            "description": c["description"],
+            "quantity": c["quantity"],
+            "team": c["team"],
+            "imgUrl": c["imgUrl"]
+        }] * c["quantity"])
+    random.shuffle(expanded)
+    return expanded
 
 
 # GET конкретна картка
