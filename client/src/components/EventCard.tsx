@@ -16,8 +16,20 @@ export const EventCard = ({ event }: { event: Event }) => {
         width: "914px",
         minHeight: "308px",
         borderRadius: "12px",
-        borderLeft: `1px solid ${theme.palette.text.secondary}`,
+        border: `1px solid ${theme.palette.text.secondary}`,
+        borderRight: "none",
         padding: 4,
+
+        // "&::before, &::after": {
+        //   content: '""',
+        //   position: "absolute",
+        //   left: "30%",
+        //   width: "50%",
+        //   height: "11px",
+        //   background: `${theme.palette.background.default}`,
+        // },
+        // "&::before": { top: -1 },
+        // "&::after": { bottom: -1 },
       }}
     >
       <Typography
