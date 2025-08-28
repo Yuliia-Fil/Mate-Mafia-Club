@@ -180,7 +180,7 @@ def seed_all():
             "description": "Назначає відстріли мафії кожної фази ночі. Може контролювати хід гри для чорної команди.",
             "quantity": 1,
             "team": "чорна",
-            "imgUrl": "don.png"
+            "imgUrl": "/uploads/don.png"
         },
         {
             "id": "mafia",
@@ -188,7 +188,7 @@ def seed_all():
             "description": "Домовляється з Доном мафії про відстріли кожної фази ночі. Ключовий гравець чорної команди.",
             "quantity": 2,
             "team": "чорна",
-            "imgUrl": "mafia.png"
+            "imgUrl": "/uploads/mafia.png"
         },
         {
             "id": "courtesan",
@@ -196,7 +196,7 @@ def seed_all():
             "description": "Прокидається разом з усією мафією лише в першу фазу ночі. Може впливати на нічні дії.",
             "quantity": 1,
             "team": "чорна",
-            "imgUrl": "prostitute.png"
+            "imgUrl": "/uploads/prostitute.png"
         },
         {
             "id": "citizen",
@@ -204,7 +204,7 @@ def seed_all():
             "description": "Прокидається лише у фазу дня, не має нічних дій. Сприяє розвитку комунікації та голосування.",
             "quantity": 5,
             "team": "червона",
-            "imgUrl": "inhabitant.png"
+            "imgUrl": "/uploads/inhabitant.png"
         },
         {
             "id": "sherif",
@@ -212,7 +212,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Запитує у ведучого колір команди кожного гравця.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "sheriff.png"
+            "imgUrl": "/uploads/sheriff.png"
         },
         {
             "id": "doctor",
@@ -220,7 +220,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Може відмінити постріл Мафії, рятуючи гравців.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "doctor.png"
+            "imgUrl": "/uploads/doctor.png"
         },
         {
             "id": "maniac",
@@ -228,7 +228,7 @@ def seed_all():
             "description": "Прокидається вночі у свою чергу. Може відстрелити будь-якого гравця і впливати на хід гри.",
             "quantity": 1,
             "team": "червона",
-            "imgUrl": "maniac.png"
+            "imgUrl": "/uploads/maniac.png"
            }
     ]
 
