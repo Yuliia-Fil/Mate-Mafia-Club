@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from . import models, crud, database
 from .database import engine
 from pydantic import BaseModel
@@ -10,6 +11,77 @@ import shutil
 import random
 
 models.Base.metadata.create_all(bind=engine)
+
+def seed_events():
+    db = database.SessionLocal()
+
+    # якщо таблиця пуста → вставляємо івенти
+    if not db.query(models.Event).first():
+        events = [
+            {
+                "title": "Ніч великих інтриг",
+                "description": "Спеціальна тематична гра з посиленими ролями та новими сценаріями. Підходить для гравців рівня вище середнього. Призи для найкращого гравця за чорну та червону команди.",
+                "date": datetime(2025, 9, 5),
+                "type": "experimental",
+                "imgUrl": "/uploads/event1.jpg.png"
+            },
+            {
+                "title": "Турнір новачків",
+                "description": "Ідеальна можливість для нових гравців спробувати свої сили у турнірному форматі! Буде один стіл, де кожен учасник зіграє 7 ігор. Навчання та дружня атмосфера гарантовані.",
+                "date": datetime(2025, 9, 12),
+                "type": "tournament",
+                "imgUrl": "/uploads/event2.jpg.png"
+            },
+            {
+                "title": "Сліпа мафія",
+                "description": "Гра в атмосфері таємничості — під час фази дня гравці не знімають маски. Чудово розвиває навички позиційної гри та побудови промов. Підходить для гравців будь-якого рівня",
+                "date": datetime(2025, 9, 19),
+                "type": "experimental",
+                "imgUrl": "/uploads/event3.jpg.png"
+            },
+            {
+                "title": "Ніч без правил",
+                "description": "Експериментальна гра з нестандартними ролями та несподіваними поворотами сюжету. Грати будуть аж 3 команди: червона, чорна та сіра. Ідеально для досвідчених гравців.",
+                "date": datetime(2025, 9, 26),
+                "type": "experimental",
+                "imgUrl": "/uploads/event4.jpg.png"
+            },
+            {
+                "title": "Мафіозний марафон",
+                "description": "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+                "date": datetime(2025, 10, 3),
+                "type": "tournament",
+                "imgUrl": "/uploads/event5.jpg.png"
+            },
+            {
+                "title": "День Народження Mate Mafia Club",
+                "description": "Найочікуваніша святкова вечірка на честь першого Дня Народження нашого клубу! Ми приготували для Вас багато сюрпризів, тож мерщій реєструйтеся! Точно будуть призи за найкращий дресс-код, тож приходьте у своєму найкращому вбранні.",
+                "date": datetime(2025, 10, 10),
+                "type": "party",
+                "imgUrl": "/uploads/event6.jpg.png"
+            },
+            {
+                "title": "Фінал сезону",
+                "description": "Велика фінальна гра сезону з визначенням найкращого гравця літнього сезону. Після гри - пригощаємо всіх тортиком та робимо тематичну фотосессію",
+                "date": datetime(2025, 10, 17),
+                "type": "tournament",
+                "imgUrl": "/uploads/event7.jpg.png"
+            }
+        ]
+
+        for e in events:
+            crud.create_event(db, e["title"], e["description"], e["date"], e["type"], e["imgUrl"])
+
+        print("✅ Events seeded!")
+
+    db.close()
+
+with engine.connect() as conn:
+    conn.execute(text('ALTER TABLE events ADD COLUMN IF NOT EXISTS "imgUrl" VARCHAR(255);'))
+    conn.commit()
+    print("Колонка imgUrl додана або вже існує")
+
+seed_events()
 
 app = FastAPI()
 
@@ -39,6 +111,7 @@ class EventBase(BaseModel):
     description: str | None = None
     date: datetime
     type: str | None = None
+    imgUrl: str | None = None
 
 class Event(EventBase):
     id: int
@@ -89,7 +162,7 @@ class Rule(BaseModel):
 # --- Ендпоінти подій ---
 @app.post("/events/", response_model=Event)
 def create_event(event: EventBase, db: Session = Depends(get_db)):
-    return crud.create_event(db, event.title, event.description, event.date, event.type)
+    return crud.create_event(db, event.title, event.description, event.date, event.type, event.imgUrl)
 
 @app.get("/events/", response_model=list[Event])
 def list_events(db: Session = Depends(get_db)):
@@ -97,7 +170,7 @@ def list_events(db: Session = Depends(get_db)):
 
 @app.put("/events/{event_id}", response_model=Event)
 def update_event_endpoint(event_id: int, event: EventBase, db: Session = Depends(get_db)):
-    updated = crud.update_event(db, event_id, event.title, event.description, event.date, event.type)
+    updated = crud.update_event(db, event_id, event.title, event.description, event.date, event.type, event.imgUrl)
     if not updated:
         raise HTTPException(status_code=404, detail="Event not found")
     return updated

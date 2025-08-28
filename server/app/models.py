@@ -9,7 +9,9 @@ class Event(Base):
     title = Column(String(100), nullable=False)
     description = Column(Text, nullable=True)
     date = Column(TIMESTAMP, default=func.now())
-    type = Column(String(50), nullable=True)  # NEW: тип події (tournament, party, experimental)
+    type = Column(String(50), nullable=True)
+    imgUrl = Column(String(255), nullable=True)
+
 
 # Гравці клубу
 class Player(Base):
