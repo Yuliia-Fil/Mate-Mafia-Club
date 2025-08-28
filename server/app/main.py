@@ -15,7 +15,6 @@ models.Base.metadata.create_all(bind=engine)
 def seed_events():
     db = database.SessionLocal()
 
-    # якщо таблиця пуста → вставляємо івенти
     if not db.query(models.Event).first():
         events = [
             {
