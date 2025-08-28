@@ -16,6 +16,9 @@ def create_event(db: Session, title: str, description: str, date: datetime, type
 def get_events(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Event).offset(skip).limit(limit).all()
 
+def get_event(db: Session, event_id: int):
+    return db.query(models.Event).filter(models.Event.id == event_id).first()
+
 # --- Оновлення події ---
 def update_event(db: Session, event_id: int, title: str, description: str, date: datetime, type: str, imgUrl: str):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
@@ -56,6 +59,9 @@ def create_player(db: Session, username: str, email: str, password: str):
 def get_players(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Player).offset(skip).limit(limit).all()
 
+def get_player(db: Session, player_id: int):
+    return db.query(models.Player).filter(models.Player.id == player_id).first()
+
 def update_player(db: Session, player_id: int, username: str = None, email: str = None, password: str = None):
     player = db.query(models.Player).filter(models.Player.id == player_id).first()
     if not player:
@@ -88,6 +94,9 @@ def create_media(db: Session, filename: str, file_type: str, url: str, descripti
 
 def get_media(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Media).offset(skip).limit(limit).all()
+
+def get_media_item(db: Session, media_id: int):
+    return db.query(models.Media).filter(models.Media.id == media_id).first()
 
 def update_media(db: Session, media_id: int, filename: str = None, file_type: str = None, url: str = None, description: str = None):
     media = db.query(models.Media).filter(models.Media.id == media_id).first()
@@ -124,6 +133,9 @@ def create_rule(db: Session, title: str, description: str = None, pdf_filename: 
 def get_rules(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Rule).offset(skip).limit(limit).all()
 
+def get_rule(db: Session, rule_id: int):
+    return db.query(models.Rule).filter(models.Rule.id == rule_id).first()
+
 def update_rule(db: Session, rule_id: int, title: str = None, description: str = None, pdf_filename: str = None, image_filename: str = None):
     rule = db.query(models.Rule).filter(models.Rule.id == rule_id).first()
     if not rule:
@@ -149,8 +161,8 @@ def delete_rule(db: Session, rule_id: int):
     return rule
 
 # --- Картки ---
-def create_card(db: Session, id: str, name: str, description: str, quantity: int, team: str, img: str = None):
-    db_card = models.Card(id=id, name=name, description=description, quantity=quantity, team=team, img=img)
+def create_card(db: Session, id: str, name: str, description: str, quantity: int, team: str, imgUrl: str = None):
+    db_card = models.Card(id=id, name=name, description=description, quantity=quantity, team=team, imgUrl=imgUrl)
     db.add(db_card)
     db.commit()
     db.refresh(db_card)
@@ -159,7 +171,10 @@ def create_card(db: Session, id: str, name: str, description: str, quantity: int
 def get_cards(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Card).offset(skip).limit(limit).all()
 
-def update_card(db: Session, card_id: str, name: str = None, description: str = None, quantity: int = None, team: str = None, img: str = None):
+def get_card(db: Session, card_id: str):
+    return db.query(models.Card).filter(models.Card.id == card_id).first()
+
+def update_card(db: Session, card_id: str, name: str = None, description: str = None, quantity: int = None, team: str = None, imgUrl: str = None):
     card = db.query(models.Card).filter(models.Card.id == card_id).first()
     if not card:
         return None
@@ -171,8 +186,8 @@ def update_card(db: Session, card_id: str, name: str = None, description: str = 
         card.quantity = quantity
     if team:
         card.team = team
-    if img:
-        card.img = img
+    if imgUrl:
+        card.imgUrl = imgUrl
     db.commit()
     db.refresh(card)
     return card

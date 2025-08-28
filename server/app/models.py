@@ -50,4 +50,4 @@ class Card(Base):
     description = Column(Text, nullable=False)
     quantity = Column(Integer, nullable=False)
     team = Column(String(50), nullable=False)  # "червона" / "чорна"
-    img = Column(String(255), nullable=True)
+    imgUrl = Column(String(255), nullable=True)
