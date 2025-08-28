@@ -1,25 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import testEventImg from "../assets/testEventImg.png";
 import smoke from "../assets/smoke.png";
 import { theme } from "../theme";
+import type { Event } from "../types";
 
-// type Event = {
-//     title: string,
-//     description: string,
-//     date: string,
-//     img: string,
-// }
+export const EventCard = ({ event }: { event: Event }) => {
+  const { title, description, date, imgUrl } = event;
 
-const testEvent = {
-  title: "Мафіозний марафон",
-  description:
-    "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
-  date: "10 жовтня, 2025",
-  img: "/assets/testEventImg.png",
-};
-
-export const EventCard = () => {
-  const { title, description, date } = testEvent;
   return (
     <Box
       sx={{
@@ -55,7 +41,7 @@ export const EventCard = () => {
 
       <Box
         component="img"
-        src={testEventImg}
+        src={imgUrl}
         alt="eventImage"
         sx={{
           position: "absolute",

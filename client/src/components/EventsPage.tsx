@@ -4,27 +4,21 @@ import { theme } from "../theme";
 import sortSelect from "../assets/sortSelect.svg";
 import search from "../assets/search.svg";
 
-// import { useEffect, useState } from "react";
-
-// type Event = {
-//   title: "string";
-//   description: "string";
-//   date: "2025-08-25T12:56:52.794Z";
-//   type: "string";
-// };
+import { useEffect, useState } from "react";
+import type { Event } from "../types";
 
 export const EventsPage = () => {
-  //   const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
-  //   useEffect(() => {
-  //     fetch("http://127.0.0.1:8000/events")
-  //       .then((res) => res.json())
-  //       .then((res) => {
-  //         console.log(res);
-  //         setEvents(res);
-  //       })
-  //       .catch(console.log);
-  //   }, []);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/events")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        setEvents(res);
+      })
+      .catch(console.log);
+  }, []);
 
   return (
     <Box>
@@ -91,8 +85,8 @@ export const EventsPage = () => {
           margin: "80px 0",
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
-          <EventCard key={index} />
+        {events.map((event) => (
+          <EventCard event={event} key={event.title} />
         ))}
       </Box>
     </Box>
