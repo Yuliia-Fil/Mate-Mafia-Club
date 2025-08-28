@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { pageTitles } from "../constants";
+import { pageTitles } from "../data/constants";
 
 type Props = {
   path: string;

@@ -1,6 +1,6 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { iconLinks, paths } from "../constants";
+import { iconLinks, paths } from "../data/constants";
 
 export const HomePage = () => {
   return (

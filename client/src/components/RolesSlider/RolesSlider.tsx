@@ -7,9 +7,9 @@ import "swiper/css/effect-cards";
 import "./RolesSlider.css";
 import { RoleCardFront } from "../RoleCardFront";
 import { useEffect, useState } from "react";
-import type { RoleCard } from "../../types";
+import type { RoleCard } from "../../data/types";
 import { getData } from "../../utils/fetch";
-import { paths } from "../../constants";
+import { paths } from "../../data/constants";
 
 export const RolesSlider = () => {
   const [activeIndex, setActiveIndex] = useState(3);

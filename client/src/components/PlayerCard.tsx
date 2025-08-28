@@ -1,5 +1,5 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { testPlayer } from "../constants";
+import { testPlayer } from "../data/constants";
 
 export const PlayerCard = () => {
   return (

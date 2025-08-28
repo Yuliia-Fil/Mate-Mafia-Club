@@ -1,8 +1,8 @@
-import facebook from "./assets/facebook.svg";
-import telegram from "./assets/telegram.svg";
-import instagram from "./assets/instagram.svg";
-import citizen from "./assets/citizen.png";
-import player from "./assets/testRoleImg.jpg";
+import facebook from "../assets/facebook.svg";
+import telegram from "../assets/telegram.svg";
+import instagram from "../assets/instagram.svg";
+import citizen from "../assets/citizen.png";
+import player from "../assets/testRoleImg.jpg";
 
 export const paths = {
   HOME: "/",

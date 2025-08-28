@@ -1,12 +1,12 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
-import { theme } from "../theme";
+import { theme } from "../data/theme";
 import search from "../assets/search.svg";
 import sortSelect from "../assets/sortSelect.svg";
 import { PlayerCard } from "./PlayerCard";
 import { useEffect, useState } from "react";
-import type { Player } from "../types";
+import type { Player } from "../data/types";
 import { getData } from "../utils/fetch";
-import { paths } from "../constants";
+import { paths } from "../data/constants";
 
 export const PlayersPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);

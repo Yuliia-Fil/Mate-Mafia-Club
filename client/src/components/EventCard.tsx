@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import smoke from "../assets/smoke.png";
-import { theme } from "../theme";
-import type { Event } from "../types";
+import { theme } from "../data/theme";
+import type { Event } from "../data/types";
 
 export const EventCard = ({ event }: { event: Event }) => {
   const { title, description, date, imgUrl } = event;
@@ -13,7 +13,8 @@ export const EventCard = ({ event }: { event: Event }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
-        width: "914px",
+        // width: "914px",
+        width: "100%",
         minHeight: "308px",
         borderRadius: "12px",
         border: `1px solid ${theme.palette.text.secondary}`,
@@ -60,8 +61,10 @@ export const EventCard = ({ event }: { event: Event }) => {
           position: "absolute",
           bottom: 10,
           right: 10,
-          width: "450px",
-          height: "350px",
+          minWidth: "35%",
+          maxWidth: "45%",
+          maxHeight: "120%",
+          objectFit: "contain",
         }}
       />
 

@@ -19,3 +19,8 @@ export type Player = {
   username: string;
   imgUrl: string;
 };
+
+export type Elips = {
+  left: string;
+  top: string;
+};

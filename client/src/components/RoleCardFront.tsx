@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
-import type { RoleCard } from "../types";
+import type { RoleCard } from "../data/types";
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />

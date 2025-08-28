@@ -1,55 +1,17 @@
 import { useLocation } from "react-router-dom";
 import style from "./BackgroundProvider.module.scss";
 import { Box } from "@mui/material";
-import { theme } from "../../theme";
+import { theme } from "../../data/theme";
 import { useEffect, useState } from "react";
-import { paths } from "../../constants";
+import { paths } from "../../data/constants";
+import type { Elips } from "../../data/types";
+import { createElipses } from "../../utils/createElipses";
 
-type BackgroundProps = {
+export const BackgroundProvider = ({
+  children,
+}: {
   children: React.ReactNode;
-};
-
-type Elips = {
-  left: string;
-  top: string;
-};
-
-const createElipses = (height: number): Elips[] => {
-  const elCount = Math.floor(height / 400);
-
-  const topR = 100;
-  const topL = Math.max(height * 0.1, 650);
-  const topM = height * 0.2;
-  const topIncrement = 0.2 * height;
-  const topMIncrement = 0.3 * height;
-
-  const elipses = Array.from({ length: elCount }, (_, index) => {
-    const n = index % 3;
-    const k = Math.floor(index / 3);
-
-    if (n === 0) {
-      return {
-        top: topR + topIncrement * k + "px",
-        left: "80%",
-      };
-    }
-    if (n === 1) {
-      return {
-        top: topL + topIncrement * k + "px",
-        left: "1%",
-      };
-    } else {
-      return {
-        top: topM + topMIncrement * k + "px",
-        left: "18%",
-      };
-    }
-  });
-
-  return elipses;
-};
-
-export const BackgroundProvider = ({ children }: BackgroundProps) => {
+}) => {
   const currentPath = useLocation().pathname;
   const [elipses, setElipses] = useState<Elips[]>([]);
   let cl = "";
@@ -62,14 +24,6 @@ export const BackgroundProvider = ({ children }: BackgroundProps) => {
     case paths.EVENTS:
       cl = "events";
       break;
-    case paths.GAME:
-      cl = "game";
-      break;
-    case paths.PLAYERS:
-      cl = "players";
-      break;
-    case paths.RULES:
-      cl = "rules";
   }
 
   useEffect(() => {

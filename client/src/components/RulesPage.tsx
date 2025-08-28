@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { rules } from "../constants";
+import { rules } from "../data/constants";
 import { PageTitle } from "./PageTitle";
 import { RolesSlider } from "./RolesSlider/RolesSlider";
 

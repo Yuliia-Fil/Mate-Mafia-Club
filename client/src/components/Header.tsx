@@ -1,9 +1,9 @@
 import { AppBar, Box, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { theme } from "../theme";
+import { theme } from "../data/theme";
 import Logo from "../assets/logo.svg";
 import MMC from "../assets/mmc.svg";
-import { navLinks } from "../constants";
+import { navLinks } from "../data/constants";
 
 export const Header = () => {
   return (

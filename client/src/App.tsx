@@ -5,7 +5,7 @@ import { HomePage } from "./components/HomePage";
 import { EventsPage } from "./components/EventsPage";
 import { PageTitle } from "./components/PageTitle";
 import { Footer } from "./components/Footer";
-import { paths } from "./constants";
+import { paths } from "./data/constants";
 import { PlayersPage } from "./components/PlayersPage";
 import { GamePage } from "./components/GamePage";
 import { RulesPage } from "./components/RulesPage";

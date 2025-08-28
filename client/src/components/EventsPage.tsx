@@ -1,13 +1,13 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { EventCard } from "./EventCard";
-import { theme } from "../theme";
+import { theme } from "../data/theme";
 import sortSelect from "../assets/sortSelect.svg";
 import search from "../assets/search.svg";
 
 import { useEffect, useState } from "react";
-import type { Event } from "../types";
+import type { Event } from "../data/types";
 import { getData } from "../utils/fetch";
-import { paths } from "../constants";
+import { paths } from "../data/constants";
 
 export const EventsPage = () => {
   const [events, setEvents] = useState<Event[]>([]);

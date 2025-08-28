@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { RoleCardBack } from "./RoleCardBack";
 import { RoleCardFront } from "./RoleCardFront";
-import type { RoleCard } from "../types";
+import type { RoleCard } from "../data/types";
 
 export const RoleCardFlip = ({ card }: { card: RoleCard }) => {
   const [flipped, setFlipped] = useState(false);
