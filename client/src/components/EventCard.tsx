@@ -16,7 +16,7 @@ export const EventCard = ({ event }: { event: Event }) => {
         width: "914px",
         minHeight: "308px",
         borderRadius: "12px",
-        border: `1px solid ${theme.palette.text.secondary}`,
+        borderLeft: `1px solid ${theme.palette.text.secondary}`,
         padding: 4,
       }}
     >
@@ -34,6 +34,7 @@ export const EventCard = ({ event }: { event: Event }) => {
         variant="body1"
         sx={{
           maxWidth: "50%",
+          lineHeight: "140%",
         }}
       >
         {description}
@@ -77,7 +78,6 @@ export const EventCard = ({ event }: { event: Event }) => {
           fontSize: "60px",
           color: "#FAECEA",
           textTransform: "uppercase",
-          maxWidth: "50%",
           zIndex: 3,
         }}
       >
