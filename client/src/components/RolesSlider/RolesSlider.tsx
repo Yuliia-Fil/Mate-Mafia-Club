@@ -6,10 +6,19 @@ import "swiper/css/navigation";
 import "swiper/css/effect-cards";
 import "./RolesSlider.css";
 import { RoleCardFront } from "../RoleCardFront";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { RoleCard } from "../../types";
+import { getData } from "../../utils/fetch";
+import { paths } from "../../constants";
 
 export const RolesSlider = () => {
   const [activeIndex, setActiveIndex] = useState(3);
+  const [roleCards, setRoleCards] = useState<RoleCard[]>([]);
+
+  useEffect(() => {
+    getData(paths.CARDS, setRoleCards);
+  }, []);
+
   return (
     <Swiper
       effect={"cards"}
@@ -31,9 +40,9 @@ export const RolesSlider = () => {
       }}
       spaceBetween={-150}
     >
-      {[1, 2, 3, 4, 5, 6, 7].map((idx, index) => (
-        <SwiperSlide key={idx} style={{ width: "292px" }}>
-          <RoleCardFront index={index} activeIndex={activeIndex} />
+      {roleCards.map((card, index) => (
+        <SwiperSlide key={card.id} style={{ width: "292px" }}>
+          <RoleCardFront card={card} index={index} activeIndex={activeIndex} />
         </SwiperSlide>
       ))}
     </Swiper>

@@ -3,8 +3,17 @@ import { theme } from "../theme";
 import search from "../assets/search.svg";
 import sortSelect from "../assets/sortSelect.svg";
 import { PlayerCard } from "./PlayerCard";
+import { useEffect, useState } from "react";
+import type { Player } from "../types";
+import { getData } from "../utils/fetch";
+import { paths } from "../constants";
 
 export const PlayersPage = () => {
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  useEffect(() => {
+    getData(paths.PLAYERS, setPlayers);
+  }, []);
   return (
     <Box>
       <Box

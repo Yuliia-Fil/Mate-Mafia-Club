@@ -10,6 +10,8 @@ export const paths = {
   EVENTS: "/events",
   PLAYERS: "/players",
   GAME: "/game",
+  CARDS: "/cards",
+  CARDS_RANDOM: "/cards/random/",
 };
 
 export const navLinks = [

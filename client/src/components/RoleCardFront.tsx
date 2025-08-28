@@ -6,9 +6,9 @@ import {
   Typography,
   type TooltipProps,
 } from "@mui/material";
-import { testRole } from "../constants";
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
+import type { RoleCard } from "../types";
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -23,9 +23,11 @@ const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
 export const RoleCardFront = ({
   activeIndex,
   index,
+  card,
 }: {
-  index: number;
+  index?: number;
   activeIndex?: number;
+  card: RoleCard;
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [offsetX, setOffsetX] = useState(0);
@@ -75,8 +77,8 @@ export const RoleCardFront = ({
       ></Box>
       <Box
         component="img"
-        src={testRole.img}
-        alt={testRole.title}
+        src={card.imgUrl}
+        alt={card.name}
         sx={{
           zIndex: 2,
           position: "relative",
@@ -91,7 +93,7 @@ export const RoleCardFront = ({
         color="#EEBCAF"
         fontSize="clamp(24px, 2vw, 28px)"
       >
-        {testRole.title}
+        {card.name}
       </Typography>
     </Box>
   );
@@ -113,7 +115,7 @@ export const RoleCardFront = ({
             alignItems: "center",
           }}
         >
-          <Typography variant="body1">{testRole.description}</Typography>
+          <Typography variant="body1">{card.description}</Typography>
         </Box>
       }
       followCursor

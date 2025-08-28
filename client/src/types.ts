@@ -4,3 +4,18 @@ export type Event = {
   date: string;
   imgUrl: string;
 };
+
+export type RoleCard = {
+  id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  team: string;
+  imgUrl: string;
+};
+
+export type Player = {
+  name: string;
+  username: string;
+  imgUrl: string;
+};

@@ -6,18 +6,14 @@ import search from "../assets/search.svg";
 
 import { useEffect, useState } from "react";
 import type { Event } from "../types";
+import { getData } from "../utils/fetch";
+import { paths } from "../constants";
 
 export const EventsPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/events")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setEvents(res);
-      })
-      .catch(console.log);
+    getData(paths.EVENTS, setEvents);
   }, []);
 
   return (
