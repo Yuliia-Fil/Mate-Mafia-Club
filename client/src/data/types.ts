@@ -15,9 +15,11 @@ export type RoleCard = {
 };
 
 export type Player = {
-  name: string;
+  id: 0;
   username: string;
-  imgUrl: string;
+  email: string;
+  avatarUrl: string;
+  role: string;
 };
 
 export type Elips = {

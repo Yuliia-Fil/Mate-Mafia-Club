@@ -80,8 +80,8 @@ export const PlayersPage = () => {
           marginTop: "40px",
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((_, index) => (
-          <PlayerCard key={index} />
+        {players.map((player) => (
+          <PlayerCard key={player.id} player={player} />
         ))}
       </Box>
     </Box>
