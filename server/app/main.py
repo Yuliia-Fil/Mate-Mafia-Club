@@ -29,13 +29,13 @@ def get_db():
         db.close()
 
 cards_data = [
-    {"id": "don", "name": "Дон мафії", "description": "Назначає відстріли мафії кожної фази ночі. Може контролювати хід гри для чорної команди.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/don.png"},
-    {"id": "mafia", "name": "Мафія", "description": "Домовляється з Доном мафії про відстріли кожної фази ночі. Ключовий гравець чорної команди.", "quantity": 2, "team": "чорна", "imgUrl": "/uploads/mafia.png"},
-    {"id": "courtesan", "name": "Повія", "description": "Прокидається разом з усією мафією лише в першу фазу ночі. Може впливати на нічні дії.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/prostitute.png"},
-    {"id": "citizen", "name": "Мешканець", "description": "Прокидається лише у фазу дня, не має нічних дій. Сприяє розвитку комунікації та голосування.", "quantity": 5, "team": "червона", "imgUrl": "/uploads/inhabitant.png"},
-    {"id": "sherif", "name": "Шериф", "description": "Прокидається вночі у свою чергу. Запитує у ведучого колір команди кожного гравця.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/sheriff.png"},
-    {"id": "doctor", "name": "Лікар", "description": "Прокидається вночі у свою чергу. Може відмінити постріл Мафії, рятуючи гравців.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/doctor.png"},
-    {"id": "maniac", "name": "Маніяк", "description": "Прокидається вночі у свою чергу. Може відстрелити будь-якого гравця і впливати на хід гри.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/maniac.png"},
+    {"id": "don", "name": "Дон мафії", "description": "Назначає відстріли мафії кожної фази ночі. Може контролювати хід гри для чорної команди.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/don1.png"},
+    {"id": "mafia", "name": "Мафія", "description": "Домовляється з Доном мафії про відстріли кожної фази ночі. Ключовий гравець чорної команди.", "quantity": 2, "team": "чорна", "imgUrl": "/uploads/mafia1.png"},
+    {"id": "courtesan", "name": "Повія", "description": "Прокидається разом з усією мафією лише в першу фазу ночі. Може впливати на нічні дії.", "quantity": 1, "team": "чорна", "imgUrl": "/uploads/prostitute1.png"},
+    {"id": "citizen", "name": "Мешканець", "description": "Прокидається лише у фазу дня, не має нічних дій. Сприяє розвитку комунікації та голосування.", "quantity": 5, "team": "червона", "imgUrl": "/uploads/inhabitant1.png"},
+    {"id": "sherif", "name": "Шериф", "description": "Прокидається вночі у свою чергу. Запитує у ведучого колір команди кожного гравця.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/sheriff1.png"},
+    {"id": "doctor", "name": "Лікар", "description": "Прокидається вночі у свою чергу. Може відмінити постріл Мафії, рятуючи гравців.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/doctor1.png"},
+    {"id": "maniac", "name": "Маніяк", "description": "Прокидається вночі у свою чергу. Може відстрелити будь-якого гравця і впливати на хід гри.", "quantity": 1, "team": "червона", "imgUrl": "/uploads/maniac1.png"},
 ]
 
 # --- Схеми Pydantic ---
@@ -130,13 +130,61 @@ def seed_all():
         db.commit()
 
         events = [
-            {"title": "Ніч великих інтриг", "description": "Спеціальна тематична гра...", "date": datetime(2025, 9, 5), "type": "experimental", "imgUrl": "/uploads/event1.png"},
-            {"title": "Турнір новачків", "description": "Ідеальна можливість для нових гравців...", "date": datetime(2025, 9, 12), "type": "tournament", "imgUrl": "/uploads/event2.png"},
-            {"title": "Сліпа мафія", "description": "Гра в атмосфері таємничості...", "date": datetime(2025, 9, 19), "type": "experimental", "imgUrl": "/uploads/event3.png"},
-            {"title": "Ніч без правил", "description": "Експериментальна гра з нестандартними ролями...", "date": datetime(2025, 9, 26), "type": "experimental", "imgUrl": "/uploads/event4.png"},
-            {"title": "Мафіозний марафон", "description": "Цілих 10 ігор поспіль...", "date": datetime(2025, 10, 3), "type": "tournament", "imgUrl": "/uploads/event5.png"},
-            {"title": "День Народження Mate Mafia Club", "description": "Найочікуваніша святкова вечірка...", "date": datetime(2025, 10, 10), "type": "party", "imgUrl": "/uploads/event6.png"},
-            {"title": "Фінал сезону", "description": "Велика фінальна гра сезону...", "date": datetime(2025, 10, 17), "type": "tournament", "imgUrl": "/uploads/event7.png"}
+            {
+                "title": "Ніч великих інтриг",
+                "description": "Спеціальна тематична гра з посиленими ролями та новими сценаріями. Підходить для гравців рівня вище середнього. Призи для найкращого гравця за чорну та червону команди.",
+                "date": datetime(2025, 9, 5),
+                "type": "experimental",
+                "imgUrl": "/uploads/event1.png"
+            },
+            
+            {
+                "title": "Турнір новачків",
+                "description": "Ідеальна можливість для нових гравців спробувати свої сили у турнірному форматі! Буде один стіл, де кожен учасник зіграє 7 ігор. Навчання та дружня атмосфера гарантовані.",
+                "date": datetime(2025, 9, 12),
+                "type": "tournament",
+                "imgUrl": "/uploads/event2.png"
+            },
+
+            {
+                "title": "Сліпа мафія",
+                "description": "Гра в атмосфері таємничості — під час фази дня гравці не знімають маски. Чудово розвиває навички позиційної гри та побудови промов. Підходить для гравців будь-якого рівня.",
+                "date": datetime(2025, 9, 19),
+                "type": "experimental",
+                "imgUrl": "/uploads/event3.png"
+            },
+
+            {
+                "title": "Ніч без правил",
+                "description": "Експериментальна гра з нестандартними ролями та несподіваними поворотами сюжету. Грати будуть аж 3 команди: червона, чорна та сіра. Ідеально для досвідчених гравців.",
+                "date": datetime(2025, 9, 26),
+                "type": "experimental",
+                "imgUrl": "/uploads/event4.png"
+            },
+
+            {
+                "title": "Мафіозний марафон",
+                "description": "Цілих 10 ігор поспіль, щоб перевірити свою витривалість та тактичне мислення. Підійде лише найвитривалішим гравцям :) Переможці отримують клубні бонуси та класні фото від професійного фотографа.",
+                "date": datetime(2025, 10, 3),
+                "type": "tournament",
+                "imgUrl": "/uploads/event5.png"
+            },
+
+            {
+                "title": "День Народження Mate Mafia Club",
+                "description": "Найочікуваніша святкова вечірка на честь першого Дня Народження нашого клубу! Ми приготували для Вас багато сюрпризів, тож мерщій реєструйтеся! Точно будуть призи за найкращий дресс-код, тож приходьте у своєму найкращому вбранні.",
+                "date": datetime(2025, 10, 10),
+                "type": "party",
+                "imgUrl": "/uploads/event6.png"
+            },
+
+            {
+                "title": "Фінал сезону",
+                "description": "Велика фінальна гра сезону з визначенням найкращого гравця літнього сезону. Після гри пригощаємо всіх тортиком та робимо тематичну фотосесію.",
+                "date": datetime(2025, 10, 17),
+                "type": "tournament",
+                "imgUrl": "/uploads/event7.png"
+            }
         ]
 
         db.bulk_save_objects([models.Event(**e) for e in events])
