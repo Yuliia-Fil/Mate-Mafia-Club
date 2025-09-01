@@ -48,9 +48,15 @@ def delete_event(db: Session, event_id: int):
     return event
 
 # --- Гравці ---
-def create_player(db: Session, username: str, email: str, password: str):
+def create_player(db: Session, username: str, email: str, password: str, avatarUrl: str = None, role: str = None):
     hashed_password = pwd_context.hash(password)
-    db_player = models.Player(username=username, email=email, password_hash=hashed_password)
+    db_player = models.Player(
+        username=username,
+        email=email,
+        password_hash=hashed_password,
+        avatarUrl=avatarUrl,
+        role=role
+    )
     db.add(db_player)
     db.commit()
     db.refresh(db_player)
@@ -62,7 +68,8 @@ def get_players(db: Session, skip: int = 0, limit: int = 100):
 def get_player(db: Session, player_id: int):
     return db.query(models.Player).filter(models.Player.id == player_id).first()
 
-def update_player(db: Session, player_id: int, username: str = None, email: str = None, password: str = None):
+def update_player(db: Session, player_id: int, username: str = None, email: str = None,
+                  password: str = None, avatarUrl: str = None, role: str = None):
     player = db.query(models.Player).filter(models.Player.id == player_id).first()
     if not player:
         return None
@@ -72,6 +79,10 @@ def update_player(db: Session, player_id: int, username: str = None, email: str 
         player.email = email
     if password:
         player.password_hash = pwd_context.hash(password)
+    if avatarUrl:
+        player.avatarUrl = avatarUrl
+    if role:
+        player.role = role
     db.commit()
     db.refresh(player)
     return player

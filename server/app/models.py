@@ -20,15 +20,16 @@ class Player(Base):
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
     password_hash = Column(String(255), nullable=False)
+    avatarUrl = Column(String(255), nullable=True)
+    role = Column(String(50), nullable=True)
     created_at = Column(TIMESTAMP, default=func.now())
-
 # Медіа
 class Media(Base):
     __tablename__ = "media"
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String(255), nullable=False)
-    file_type = Column(String(50), nullable=False)  # "photo" / "pdf"
-    url = Column(String(255), nullable=False)      # шлях до файлу
+    file_type = Column(String(50), nullable=False)
+    url = Column(String(255), nullable=False)
     description = Column(Text, nullable=True)
     uploaded_at = Column(TIMESTAMP, default=func.now())
 
@@ -45,9 +46,9 @@ class Rule(Base):
 # Картки ролей
 class Card(Base):
     __tablename__ = "cards"
-    id = Column(String(50), primary_key=True, index=True)  # Наприклад "don", "mafia"
+    id = Column(String(50), primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     description = Column(Text, nullable=False)
     quantity = Column(Integer, nullable=False)
-    team = Column(String(50), nullable=False)  # "червона" / "чорна"
+    team = Column(String(50), nullable=False)
     imgUrl = Column(String(255), nullable=True)

@@ -10,8 +10,11 @@ from datetime import datetime
 import os
 import shutil
 import random
+import uuid
 from urllib.parse import urljoin
 from typing import List, Optional
+from passlib.context import CryptContext
+
 
 # --- Ініціалізація БД ---
 models.Base.metadata.create_all(bind=engine)
@@ -54,9 +57,21 @@ class PlayerBase(BaseModel):
     username: str
     email: str
     password: str
+    avatarUrl: str | None = None
+    role: str | None = None
 
 class Player(PlayerBase):
     id: int
+    class Config:
+        from_attributes = True
+
+class PlayerOut(BaseModel):
+    id: int
+    username: str
+    email: str
+    avatarUrl: str | None
+    role: str | None
+
     class Config:
         from_attributes = True
 
@@ -107,7 +122,6 @@ app.add_middleware(
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 
-# --- Переконатись, що колонка imgUrl існує ---
 with engine.connect() as conn:
     conn.execute(text('ALTER TABLE events ADD COLUMN IF NOT EXISTS "imgUrl" VARCHAR(255);'))
     conn.commit()
@@ -251,6 +265,150 @@ def seed_all():
 
     db.close()
 
+    # ---------- PLAYERS ----------
+    db.query(models.Player).delete()
+    db.commit()
+
+    players = [
+
+        {
+            "username": "anna_k",
+            "email": "anna.k@example.com",
+            "password": "pass1",
+            "avatarUrl": "/uploads/player1.png",
+            "role": "мешканець"
+        },
+
+        {
+            "username": "maria_p",
+            "email": "maria.p@example.com",
+            "password": "pass2",
+            "avatarUrl": "/uploads/player2.png",
+            "role": "мафія"
+        },
+
+        {
+            "username": "sofia_d",
+            "email": "sofia.d@example.com",
+            "password": "pass3",
+            "avatarUrl": "/uploads/player3.png",
+            "role": "повія"
+        },
+
+        {
+            "username": "olena_m",
+            "email": "olena.m@example.com",
+            "password": "pass4",
+            "avatarUrl": "/uploads/player4.png",
+            "role": "мешканець"
+        },
+
+        {
+            "username": "iryna_s",
+            "email": "iryna.s@example.com",
+            "password": "pass5",
+            "avatarUrl": "/uploads/player5.png",
+            "role": "лікар"
+        },
+
+        {
+            "username": "kateryna_b",
+            "email": "kateryna.b@example.com",
+            "password": "pass6",
+            "avatarUrl": "/uploads/player6.png",
+            "role": "мешканець"
+        },
+
+        {
+            "username": "oksana_v",
+            "email": "oksana.v@example.com",
+            "password": "pass7",
+            "avatarUrl": "/uploads/player7.png",
+            "role": "шериф"
+        },
+
+        {
+            "username": "nastya_l",
+            "email": "nastya.l@example.com",
+            "password": "pass8",
+            "avatarUrl": "/uploads/player8.png",
+            "role": "мешканець"
+        },
+
+        {
+            "username": "victoria_r",
+            "email": "victoria.r@example.com",
+            "password": "pass9",
+            "avatarUrl": "/uploads/player9.png",
+            "role": "мешканець"
+        },
+
+        {
+            "username": "daria_h",
+            "email": "daria.h@example.com",
+            "password": "pass10",
+            "avatarUrl": "/uploads/player10.png",
+            "role": "мафія"
+        },
+
+        {
+            "username": "yulia_t",
+            "email": "yulia.t@example.com",
+            "password": "pass11",
+            "avatarUrl": "/uploads/player11.png", 
+            "role": "мешканець"
+        },
+
+        {
+            "username": "oleh_k",
+            "email": "oleh.k@example.com",
+            "password": "pass12",
+            "avatarUrl": "/uploads/player12.png",
+            "role": "дон"
+        },
+
+        {
+            "username": "andriy_f",
+            "email": "andriy.f@example.com",
+            "password": "pass13",
+            "avatarUrl": "/uploads/player13.png",
+            "role": "маніяк"
+        },
+
+        {
+            "username": "taras_y",
+            "email": "taras.y@example.com",
+            "password": "pass14",
+            "avatarUrl": "/uploads/player14.png", 
+            "role": "мешканець"
+        },
+
+        {
+            "username": "serhiy_n",
+            "email": "serhiy.n@example.com",
+            "password": "pass15",
+            "avatarUrl": "/uploads/player15.png", 
+            "role": "мешканець"
+        },
+    ]
+
+    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+    for p in players:
+        hashed_password = pwd_context.hash(p["password"])
+        db_player = models.Player(
+            username=p["username"],
+            email=p["email"],
+            password_hash=hashed_password,
+            avatarUrl=p["avatarUrl"],
+            role=p["role"]
+        )
+        db.add(db_player)
+        db.commit()
+        db.refresh(db_player)
+        print(f" - Player {db_player.username} ({db_player.role})")
+
+    print("✅ Players reseeded")
 
 # Виклик
 seed_all()
@@ -260,7 +418,6 @@ seed_all()
 @app.get("/events/", response_model=List[Event])
 def get_events(request: Request, db: Session = Depends(get_db)):
     events = crud.get_events(db)
-    # Додаємо повний URL для зображень
     for e in events:
         if e.imgUrl and e.imgUrl.startswith("/uploads/"):
             e.imgUrl = f"{request.url.scheme}://{request.client.host}:8000{e.imgUrl}"
@@ -312,7 +469,7 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
     return {"detail": "Event deleted"}
 
 # --- Гравці ---
-@app.get("/players/", response_model=List[Player])
+@app.get("/players/", response_model=List[PlayerOut])
 def get_players(db: Session = Depends(get_db)):
     return crud.get_players(db)
 
@@ -323,14 +480,52 @@ def get_player(player_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Player not found")
     return player
 
-@app.post("/players/", response_model=Player)
-def create_player(player: PlayerBase, db: Session = Depends(get_db)):
-    return crud.create_player(db, player.username, player.email, player.password)
+@app.post("/players/{player_id}/avatar")
+async def upload_avatar(player_id: int, file: UploadFile = File(...), db: Session = Depends(get_db)):
+
+    file_path = os.path.join(UPLOAD_DIR, f"player_{player_id}_{file.filename}")
+
+    
+    with open(file_path, "wb") as buffer:
+        buffer.write(await file.read())
+
+    
+    player = crud.update_player(db, player_id, username=None, email=None, password=None)
+    if not player:
+        raise HTTPException(status_code=404, detail="Player not found")
+    
+    player.avatarUrl = file_path
+    db.commit()
+    db.refresh(player)
+
+    return {"avatarUrl": file_path}
+
 
 @app.put("/players/{player_id}", response_model=Player)
-
 def update_player(player_id: int, player: PlayerBase, db: Session = Depends(get_db)):
-    updated = crud.update_player(db, player_id, player.username, player.email, player.password)
+    updated = crud.update_player(
+        db, player_id,
+        username=player.username,
+        email=player.email,
+        password=player.password,
+        avatarUrl=player.avatarUrl,
+        role=player.role
+    )
+    if not updated:
+        raise HTTPException(status_code=404, detail="Player not found")
+    return updated
+
+
+@app.put("/players/{player_id}", response_model=Player)
+def update_player(player_id: int, player: PlayerBase, db: Session = Depends(get_db)):
+    updated = crud.update_player(
+        db, player_id,
+        username=player.username,
+        email=player.email,
+        password=player.password,
+        avatarUrl=player.avatarUrl,
+        role=player.role
+    )
     if not updated:
         raise HTTPException(status_code=404, detail="Player not found")
     return updated
@@ -444,23 +639,24 @@ def delete_rule(rule_id: int, db: Session = Depends(get_db)):
 def get_cards(request: Request, db: Session = Depends(get_db)):
     cards = crud.get_cards(db)
     for card in cards:
-        if card.imgUrl:  # перевірка, що imgUrl існує
-            # Правильний повний URL
+        if card.imgUrl:
             card.imgUrl = str(request.base_url) + card.imgUrl.lstrip("/")
     return cards
 
+# GET випадкові картки з урахуванням кількості
 @app.get("/cards/random/", response_model=List[Card])
-def get_random_cards():
+def get_random_cards(request: Request):
     expanded = []
     for c in cards_data:
-        expanded.extend([{
-            "id": c["id"],
-            "name": c["name"],
-            "description": c["description"],
-            "quantity": c["quantity"],
-            "team": c["team"],
-            "imgUrl": c["imgUrl"]
-        }] * c["quantity"])
+        for _ in range(c["quantity"]):
+            expanded.append({
+                "id": str(uuid.uuid4()),
+                "name": c["name"],
+                "description": c["description"],
+                "quantity": 1,
+                "team": c["team"],
+                "imgUrl": str(request.base_url) + c["imgUrl"].lstrip("/")
+            })
     random.shuffle(expanded)
     return expanded
 
