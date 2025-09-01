@@ -21,8 +21,8 @@ export const GamePage = () => {
         marginTop: "80px",
       }}
     >
-      {cards.map((card) => (
-        <RoleCardFlip card={card} key={card.id} />
+      {cards.map((card, i) => (
+        <RoleCardFlip card={card} key={i} />
       ))}
     </Box>
   );

@@ -13,7 +13,6 @@ export const EventCard = ({ event }: { event: Event }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
-        // width: "914px",
         width: "100%",
         minHeight: "308px",
         borderRadius: "12px",
