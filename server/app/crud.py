@@ -73,16 +73,11 @@ def update_player(db: Session, player_id: int, username: str = None, email: str 
     player = db.query(models.Player).filter(models.Player.id == player_id).first()
     if not player:
         return None
-    if username:
-        player.username = username
-    if email:
-        player.email = email
-    if password:
-        player.password_hash = pwd_context.hash(password)
-    if avatarUrl:
-        player.avatarUrl = avatarUrl
-    if role:
-        player.role = role
+    if username: player.username = username
+    if email: player.email = email
+    if password: player.password_hash = pwd_context.hash(password)
+    if avatarUrl: player.avatarUrl = avatarUrl
+    if role: player.role = role
     db.commit()
     db.refresh(player)
     return player
