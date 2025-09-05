@@ -52,21 +52,16 @@ class Event(EventBase):
         from_attributes = True
 
 class PlayerBase(BaseModel):
+    name: str
     username: str
     email: str
-    password: str
     avatarUrl: str | None = None
-    role: str | None = None
 
 class PlayerCreate(PlayerBase):
     pass
 
-class PlayerOut(BaseModel):
+class PlayerOut(PlayerBase):
     id: int
-    username: str
-    email: str
-    avatarUrl: str | None
-    role: str | None
 
     class Config:
         orm_mode = True
@@ -212,130 +207,114 @@ def seed_all():
         players = [
 
             {
+                "name": "Анна Клин",
                 "username": "anna_k",
                 "email": "anna.k@example.com",
-                "password": "pass1",
                 "avatarUrl": "/uploads/player1.png",
-                "role": "мешканець"
             },
 
             {
+                "name": "Марія Петровська",
                 "username": "maria_p",
                 "email": "maria.p@example.com",
-                "password": "pass2",
                 "avatarUrl": "/uploads/player2.png",
-                "role": "мафія"
             },
 
             {
+                "name": "Софія Дмитренко",
                 "username": "sofia_d",
                 "email": "sofia.d@example.com",
-                "password": "pass3",
                 "avatarUrl": "/uploads/player3.png",
-                "role": "повія"
             },
 
             {
+                "name": "Олена Мельник",
                 "username": "olena_m",
                 "email": "olena.m@example.com",
-                "password": "pass4",
                 "avatarUrl": "/uploads/player4.png",
-                "role": "мешканець"
             },
 
             {
+                "name": "Ірина Сидоренко",
                 "username": "iryna_s",
                 "email": "iryna.s@example.com",
-                "password": "pass5",
                 "avatarUrl": "/uploads/player5.png",
-                "role": "лікар"
             },
 
             {
+                "name": "Катерина Бондаренко",
                 "username": "kateryna_b",
                 "email": "kateryna.b@example.com",
-                "password": "pass6",
                 "avatarUrl": "/uploads/player6.png",
-                "role": "мешканець"
             },
 
             {
+                "name": "Оксана Василенко",
                 "username": "oksana_v",
                 "email": "oksana.v@example.com",
-                "password": "pass7",
                 "avatarUrl": "/uploads/player7.png",
-                "role": "шериф"
             },
 
             {
+                "name": "Настя Левченко",
                 "username": "nastya_l",
                 "email": "nastya.l@example.com",
-                "password": "pass8",
                 "avatarUrl": "/uploads/player8.png",
-                "role": "мешканець"
             },
 
             {
+                "name": "Вікторія Романенко",
                 "username": "victoria_r",
                 "email": "victoria.r@example.com",
-                "password": "pass9",
                 "avatarUrl": "/uploads/player9.png",
-                "role": "мешканець"
             },
 
             {
+                "name": "Дарія Харченко",
                 "username": "daria_h",
                 "email": "daria.h@example.com",
-                "password": "pass10",
                 "avatarUrl": "/uploads/player10.png",
-                "role": "мафія"
             },
 
             {
+                "name": "Юлія Філь",
                 "username": "yulia_t",
                 "email": "yulia.t@example.com",
-                "password": "pass11",
                 "avatarUrl": "/uploads/player11.png", 
-                "role": "мешканець"
             },
 
             {
+                "name": "Олег Кравченко",
                 "username": "oleh_k",
                 "email": "oleh.k@example.com",
-                "password": "pass12",
                 "avatarUrl": "/uploads/player12.png",
-                "role": "дон"
             },
 
             {
+                "name": "Андрій Федоренко",
                 "username": "andriy_f",
                 "email": "andriy.f@example.com",
-                "password": "pass13",
                 "avatarUrl": "/uploads/player13.png",
-                "role": "маніяк"
             },
 
             {
+                "name": "Тарас Яценко",
                 "username": "taras_y",
                 "email": "taras.y@example.com",
-                "password": "pass14",
                 "avatarUrl": "/uploads/player14.png", 
-                "role": "мешканець"
             },
 
             {
+                "name": "Сергій Новак",
                 "username": "serhiy_n",
                 "email": "serhiy.n@example.com",
-                "password": "pass15",
-                "avatarUrl": "/uploads/player15.png", 
-                "role": "мешканець"
+                "avatarUrl": "/uploads/player15.png",
             },
         ]
 
         pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
         for p in players:
-            hashed_password = pwd_context.hash(p["password"])
             avatar_path = os.path.join(UPLOAD_DIR, os.path.basename(p["avatarUrl"]))
             if not os.path.isfile(avatar_path):
                 print(f"⚠️ Аватар не знайдено: {avatar_path}")
@@ -343,9 +322,8 @@ def seed_all():
             db_player = models.Player(
                 username=p["username"],
                 email=p["email"],
-                password_hash=hashed_password,
+                name=p["name"],
                 avatarUrl=p["avatarUrl"],
-                role=p["role"]
             )
             db.add(db_player)
 
@@ -353,8 +331,7 @@ def seed_all():
 
         print("✅ Players reseeded:")
         for player in crud.get_players(db):
-            print(f" - {player.username} ({player.role})")
-
+            print(f" - {player.username}")
 
     except Exception as e:
         db.rollback()
@@ -436,11 +413,10 @@ def get_player(player_id: int, db: Session = Depends(get_db)):
 def create_player_endpoint(player: PlayerCreate, db: Session = Depends(get_db)):
     return crud.create_player(
         db,
+        name=player.name,
         username=player.username,
         email=player.email,
-        password=player.password,
         avatarUrl=player.avatarUrl,
-        role=player.role
     )
 
 @app.put("/players/{player_id}", response_model=PlayerOut)
@@ -448,11 +424,10 @@ def update_player_endpoint(player_id: int, player: PlayerBase, db: Session = Dep
     updated = crud.update_player(
         db,
         player_id,
+        name=player.name,
         username=player.username,
         email=player.email,
-        password=player.password,
-        avatarUrl=getattr(player, "avatarUrl", None),
-        role=getattr(player, "role", None)
+        avatarUrl=player.avatarUrl,
     )
     if not updated:
         raise HTTPException(status_code=404, detail="Player not found")

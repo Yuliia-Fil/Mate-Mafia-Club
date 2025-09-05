@@ -17,12 +17,12 @@ class Event(Base):
 class Player(Base):
     __tablename__ = "players"
     id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(50), nullable=False)
     username = Column(String(50), unique=True, nullable=False)
     email = Column(String(100), unique=True, nullable=False)
-    password_hash = Column(String(255), nullable=False)
     avatarUrl = Column(String(255), nullable=True)
-    role = Column(String(50), nullable=True)
     created_at = Column(TIMESTAMP, default=func.now())
+
 # Медіа
 class Media(Base):
     __tablename__ = "media"
