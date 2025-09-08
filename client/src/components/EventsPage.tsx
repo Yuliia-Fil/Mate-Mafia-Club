@@ -1,7 +1,8 @@
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import { EventCard } from "./EventCard";
 import { theme } from "../data/theme";
-import sortSelect from "../assets/sortSelect.svg";
+import SortIcon from "../assets/sortIcon.svg?react";
+import FilterIcon from "../assets/filterIcon.svg?react";
 import search from "../assets/search.svg";
 
 import { useEffect, useState } from "react";
@@ -11,6 +12,8 @@ import { paths } from "../data/constants";
 
 export const EventsPage = () => {
   const [events, setEvents] = useState<Event[]>([]);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
 
   useEffect(() => {
     getData(paths.EVENTS, setEvents);
@@ -60,18 +63,53 @@ export const EventsPage = () => {
             ),
           }}
         />
-
-        <Button
-          sx={{
-            width: "91px",
-            height: "40px",
-            borderRadius: "1000px",
-          }}
-          variant="contained"
-          onClick={() => {}}
-        >
-          <img src={sortSelect}></img>
-        </Button>
+        <Box>
+          <Button
+            sx={{
+              width: "91px",
+              height: "40px",
+              borderRadius: "1000px",
+              marginRight: "40px",
+              border: `1px solid ${theme.palette.text.secondary}`,
+              backgroundColor: filterOpen
+                ? "#FFFFFF"
+                : theme.palette.background.paper,
+            }}
+            variant="contained"
+            onClick={() => {
+              setFilterOpen((p) => !p);
+              setSortOpen(false);
+            }}
+          >
+            <FilterIcon
+              style={{
+                color: filterOpen ? "black" : "white",
+              }}
+            />
+          </Button>
+          <Button
+            sx={{
+              width: "91px",
+              height: "40px",
+              borderRadius: "1000px",
+              backgroundColor: sortOpen
+                ? "#FFFFFF"
+                : theme.palette.background.paper,
+              border: `1px solid ${theme.palette.text.secondary}`,
+            }}
+            variant="contained"
+            onClick={() => {
+              setFilterOpen(false);
+              setSortOpen((p) => !p);
+            }}
+          >
+            <SortIcon
+              style={{
+                color: sortOpen ? "black" : "white",
+              }}
+            />
+          </Button>
+        </Box>
       </Box>
       <Box
         sx={{

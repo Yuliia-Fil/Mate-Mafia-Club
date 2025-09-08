@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import smoke from "../assets/smoke.png";
-import { theme } from "../data/theme";
 import type { Event } from "../data/types";
 
 export const EventCard = ({ event }: { event: Event }) => {
@@ -15,21 +14,23 @@ export const EventCard = ({ event }: { event: Event }) => {
         justifyContent: "space-evenly",
         width: "100%",
         minHeight: "308px",
-        borderRadius: "12px",
-        border: `1px solid ${theme.palette.text.secondary}`,
-        borderRight: "none",
         padding: 4,
+        borderRadius: "12px",
 
-        // "&::before, &::after": {
-        //   content: '""',
-        //   position: "absolute",
-        //   left: "30%",
-        //   width: "50%",
-        //   height: "11px",
-        //   background: `${theme.palette.background.default}`,
-        // },
-        // "&::before": { top: -1 },
-        // "&::after": { bottom: -1 },
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+          borderRadius: "12px",
+          padding: "1px",
+          background:
+            "linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0), transparent)",
+          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          maskComposite: "exclude",
+        },
       }}
     >
       <Typography
@@ -58,7 +59,7 @@ export const EventCard = ({ event }: { event: Event }) => {
         alt="eventImage"
         sx={{
           position: "absolute",
-          bottom: 10,
+          bottom: 0,
           right: 10,
           minWidth: "35%",
           maxWidth: "45%",
