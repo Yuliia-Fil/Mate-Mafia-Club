@@ -4,7 +4,6 @@ import type { Event } from "../data/types";
 
 export const EventCard = ({ event }: { event: Event }) => {
   const { title, description, date, imgUrl } = event;
-
   return (
     <Box
       sx={{

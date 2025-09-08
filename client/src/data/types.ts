@@ -19,10 +19,20 @@ export type Player = {
   username: string;
   email: string;
   avatarUrl: string;
-  role: string;
+  name: string;
 };
 
 export type Elips = {
   left: string;
   top: string;
+};
+
+type Option = {
+  label: string;
+  value: string;
+};
+
+export type Form = {
+  label: string;
+  options: Option[];
 };

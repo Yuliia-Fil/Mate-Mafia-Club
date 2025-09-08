@@ -53,6 +53,8 @@ export const theme = createTheme({
       fontFamily: "'Inter', sans-serif",
       fontWeight: 400,
       fontSize: "16px",
+      lineHeight: "100%",
+      textTransform: "none",
     },
   },
 });

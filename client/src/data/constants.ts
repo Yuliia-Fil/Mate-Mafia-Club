@@ -1,8 +1,6 @@
 import facebook from "../assets/facebook.svg";
 import telegram from "../assets/telegram.svg";
 import instagram from "../assets/instagram.svg";
-import citizen from "../assets/citizen.png";
-import player from "../assets/testRoleImg.jpg";
 
 export const paths = {
   HOME: "/",
@@ -118,15 +116,29 @@ export const pageTitles = [
   },
 ];
 
-export const testRole = {
-  title: "Мешканець",
-  description:
-    "Прокидається лише у фазу дня, не має нічних дій. Активно шукає мафію та будує червону команду.",
-  img: citizen,
-};
+export const eventsSortFields = [
+  {
+    label: "За датою",
+    options: [
+      { label: "Спочатку нові", value: "new" },
+      { label: "Спочатку старі", value: "old" },
+    ],
+  },
+];
 
-export const testPlayer = {
-  nickName: "Леді Інтрига",
-  name: "Марія Клин",
-  img: player,
-};
+export const playersSortFields = [
+  {
+    label: "За імʼям",
+    options: [
+      { label: "А-Я", value: "ascName" },
+      { label: "Я-А", value: "decName" },
+    ],
+  },
+  {
+    label: "За нікнеймом",
+    options: [
+      { label: "А-Я", value: "acsNick" },
+      { label: "Я-А", value: "descNick" },
+    ],
+  },
+];

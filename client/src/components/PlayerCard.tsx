@@ -1,5 +1,4 @@
 import { Avatar, Box, Typography } from "@mui/material";
-import { testPlayer } from "../data/constants";
 import type { Player } from "../data/types";
 
 export const PlayerCard = ({ player }: { player: Player }) => {
@@ -20,11 +19,11 @@ export const PlayerCard = ({ player }: { player: Player }) => {
           height: "170px",
           marginBottom: "20px",
         }}
-        alt={player.role}
-        src={player.avatarUrl}
+        alt={player.name}
+        src={`http://127.0.0.1:8000${player.avatarUrl}`}
       ></Avatar>
       <Typography marginBottom="10px" fontSize="15px" fontWeight={600}>
-        {player.role}
+        {player.name}
       </Typography>
       <Typography color="#C2C2C2" fontSize={"13px"}>
         {player.username}
