@@ -27,10 +27,25 @@ export const BackgroundProvider = ({
   }
 
   useEffect(() => {
-    const height = document.documentElement.scrollHeight;
-
-    setElipses(createElipses(height));
+    setElipses(createElipses(document.documentElement.scrollHeight));
   }, [currentPath]);
+
+  useEffect(() => {
+    console.log(document.documentElement.scrollHeight, "1");
+
+    const observer = new MutationObserver(() => {
+      console.log(document.documentElement.scrollHeight);
+      setElipses(createElipses(document.documentElement.scrollHeight));
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <Box

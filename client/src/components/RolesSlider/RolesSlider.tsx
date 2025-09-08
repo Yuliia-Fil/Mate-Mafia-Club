@@ -5,7 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/effect-cards";
 import "./RolesSlider.css";
-import { RoleCardFront } from "../RoleCardFront";
+import { RoleCardFront } from "../RoleCard/RoleCardFront";
 import { useEffect, useState } from "react";
 import type { RoleCard } from "../../data/types";
 import { getData } from "../../utils/fetch";

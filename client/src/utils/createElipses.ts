@@ -1,7 +1,7 @@
 import type { Elips } from "../data/types";
 
 export const createElipses = (height: number): Elips[] => {
-  const elCount = Math.floor(height / 200);
+  const elCount = Math.floor(height / 400);
 
   const topR = 100;
   const topL = Math.max(height * 0.1, 650);

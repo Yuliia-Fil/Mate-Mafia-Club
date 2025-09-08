@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import { RoleCardFlip } from "./RoleCardFlip";
 import { useEffect, useState } from "react";
 import { getData } from "../utils/fetch";
 import { paths } from "../data/constants";
 import type { RoleCard } from "../data/types";
+import { RoleCardFlip } from "./RoleCard/RoleCardFlip";
 
 export const GamePage = () => {
   const [cards, setCards] = useState<RoleCard[]>([]);

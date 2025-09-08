@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { RoleCardBack } from "./RoleCardBack";
-import { RoleCardFront } from "./RoleCardFront";
-import type { RoleCard } from "../data/types";
+import { RoleCardBack } from "../RoleCard/RoleCardBack";
+import { RoleCardFront } from "../RoleCard/RoleCardFront";
+import type { RoleCard } from "../../data/types";
 
 export const RoleCardFlip = ({ card }: { card: RoleCard }) => {
   const [flipped, setFlipped] = useState(false);
@@ -47,7 +47,7 @@ export const RoleCardFlip = ({ card }: { card: RoleCard }) => {
             transform: "rotateY(180deg)",
           }}
         >
-          <RoleCardFront card={card} />
+          <RoleCardFront card={card} activeIndex={13} />
         </div>
       </div>
     </div>

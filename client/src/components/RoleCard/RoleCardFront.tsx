@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import { useEffect, useRef, useState } from "react";
-import type { RoleCard } from "../data/types";
+import type { RoleCard } from "../../data/types";
 
 const CustomTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -49,7 +49,6 @@ export const RoleCardFront = ({
         width: "100%",
         maxWidth: "292px",
         minWidth: "164px",
-        aspectRatio: 1.5,
         background:
           "linear-gradient(180deg, #07070B00 0%, #07070BFF 100%), #1A1B1D",
         boxShadow: "0px 4px 12px #0000001F",
@@ -75,6 +74,7 @@ export const RoleCardFront = ({
           zIndex: 1,
         }}
       ></Box>
+
       <Box
         component="img"
         src={card.imgUrl}
@@ -82,11 +82,12 @@ export const RoleCardFront = ({
         sx={{
           zIndex: 2,
           position: "relative",
-          objectFit: "cover",
+          objectFit: "contain",
           width: "100%",
-          height: "auto",
+          aspectRatio: 1,
         }}
       ></Box>
+
       <Typography
         textAlign="center"
         variant="h2"
