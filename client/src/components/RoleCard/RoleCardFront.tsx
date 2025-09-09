@@ -51,6 +51,7 @@ export const RoleCardFront = ({
         width: "100%",
         maxWidth: "292px",
         minWidth: "164px",
+        minHeight: "256px",
         background:
           "linear-gradient(180deg, #07070B00 0%, #07070BFF 100%), #1A1B1D",
         boxShadow: "0px 4px 12px #0000001F",
@@ -61,6 +62,7 @@ export const RoleCardFront = ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        backfaceVisibility: "hidden",
       }}
     >
       <Box
@@ -92,9 +94,9 @@ export const RoleCardFront = ({
 
       <Typography
         textAlign="center"
-        variant="h2"
+        fontFamily="'Playfair Display', serif"
         color="#EEBCAF"
-        fontSize="clamp(24px, 2vw, 28px)"
+        fontSize="clamp(24px, 20vw, 28px)"
       >
         {card.name}
       </Typography>

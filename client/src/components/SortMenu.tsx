@@ -59,7 +59,6 @@ export const SortMenu = ({
           style={{ cursor: "pointer" }}
           onClick={() => {
             setSortOpen(false);
-            setSelectedValue("");
           }}
         />
       </Box>
@@ -87,7 +86,7 @@ export const SortMenu = ({
                   <FormControlLabel
                     key={option.label}
                     value={option.value}
-                    control={<Radio />}
+                    control={<Radio checked={selectedValue === option.value} />}
                     label={option.label}
                     sx={{
                       "& .MuiFormControlLabel-label": {

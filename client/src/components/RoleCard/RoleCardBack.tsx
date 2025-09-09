@@ -9,6 +9,7 @@ export const RoleCardBack = () => {
         maxWidth: "292px",
         minWidth: "164px",
         aspectRatio: 2 / 2.85,
+        minHeight: "256px",
         bgcolor: "#1A1B1D",
         boxShadow: "0px 4px 12px #0000001F",
         borderRadius: "12px",
@@ -17,6 +18,7 @@ export const RoleCardBack = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        backfaceVisibility: "hidden",
       }}
     >
       <Box
@@ -46,16 +48,18 @@ export const RoleCardBack = () => {
           style={{
             zIndex: 2,
             position: "relative",
-            width: "32%",
-            height: "34%",
+            width: "32px",
+            height: "34px",
           }}
         />
         <Typography
-          textAlign="center"
-          textTransform="uppercase"
-          variant="h2"
-          fontSize="clamp(16px, 10%, 20px)"
-          letterSpacing={"0.05em"}
+          sx={{
+            fontFamily: "'Playfair Display', serif",
+            letterSpacing: "0.05%",
+            textAlign: "center",
+            textTransform: "uppercase",
+            fontSize: "18px !important",
+          }}
         >
           Mate Mafia <br />
           Club
