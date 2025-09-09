@@ -4,6 +4,7 @@ import {
   Tooltip,
   tooltipClasses,
   Typography,
+  useMediaQuery,
   type TooltipProps,
 } from "@mui/material";
 import styled from "@emotion/styled";
@@ -32,7 +33,8 @@ export const RoleCardFront = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
-  const showDescription = activeIndex === index;
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const showDescription = activeIndex === index && !isMobile;
 
   useEffect(() => {
     if (cardRef.current) {

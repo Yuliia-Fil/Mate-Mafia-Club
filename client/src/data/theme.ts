@@ -45,7 +45,11 @@ export const theme = createTheme({
     h2: {
       fontFamily: "'Playfair Display', serif",
       fontWeight: 400,
-      fontSize: "32px",
+      fontSize: "20px", // xs
+
+      [`@media (min-width:600px)`]: {
+        fontSize: "32px", // sm
+      },
       lineHeight: "100%",
       letterSpacing: "0%",
     },
