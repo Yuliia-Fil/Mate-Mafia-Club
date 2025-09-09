@@ -32,7 +32,11 @@ export const theme = createTheme({
     h1: {
       fontFamily: "'Playfair Display', serif",
       fontWeight: 400,
-      fontSize: "40px",
+      fontSize: "24px", // xs
+
+      [`@media (min-width:600px)`]: {
+        fontSize: "40px", // sm
+      },
       lineHeight: "100%",
       letterSpacing: "0%",
       textAlign: "center",
@@ -46,7 +50,16 @@ export const theme = createTheme({
       letterSpacing: "0%",
     },
 
-    body1: { fontWeight: 400, fontSize: "20px", lineHeight: 1.2 },
+    body1: {
+      fontWeight: 400,
+      fontSize: "16px", // xs
+
+      [`@media (min-width:600px)`]: {
+        fontSize: "20px", // sm
+      },
+      lineHeight: 1.2,
+    },
+
     body2: { fontWeight: 300, fontSize: "24px", lineHeight: 1 },
 
     button: {

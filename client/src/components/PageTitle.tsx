@@ -24,13 +24,13 @@ export const PageTitle = ({ path }: Props) => {
     page && (
       <Box
         sx={{
-          marginBlock: "80px",
+          marginBlock: { xs: "32px", sm: "80px" },
           width: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: "24px",
+          gap: { xs: " 16px", sm: "24px" },
         }}
       >
         <Typography variant="h1">{page.title}</Typography>
@@ -39,6 +39,7 @@ export const PageTitle = ({ path }: Props) => {
           color="text.secondary"
           sx={{
             width: "547px",
+            maxWidth: "80%",
             textAlign: "center",
             lineHeight: 1.4,
           }}

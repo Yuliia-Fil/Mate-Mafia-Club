@@ -21,6 +21,7 @@ export const SearchBar = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        gap: "16px",
       }}
     >
       <TextField
@@ -28,6 +29,7 @@ export const SearchBar = () => {
         placeholder="Пошук..."
         sx={{
           width: "214px",
+          maxWidth: "50%",
           "& .MuiOutlinedInput-root": {
             height: "45px",
             backgroundColor: theme.palette.background.paper,
@@ -57,15 +59,25 @@ export const SearchBar = () => {
           ),
         }}
       />
-      <Box display="flex">
+      <Box
+        sx={{
+          display: "flex",
+          gap: { xs: "16px", sm: "40px" },
+        }}
+      >
         {currentPath === paths.EVENTS && (
-          <Box position="relative">
+          <Box
+            sx={{
+              position: "relative",
+              maxWidth: "50%",
+            }}
+          >
             <Button
               sx={{
                 width: "91px",
+                maxWidth: "calc(100%-8px)",
                 height: "40px",
                 borderRadius: "1000px",
-                marginRight: "40px",
                 border: `1px solid ${theme.palette.text.secondary}`,
                 backgroundColor: filterOpen
                   ? "#FFFFFF"
@@ -86,10 +98,16 @@ export const SearchBar = () => {
             {filterOpen && <FilterMenu setFilterOpen={setFilterOpen} />}
           </Box>
         )}
-        <Box position="relative">
+        <Box
+          sx={{
+            position: "relative",
+            maxWidth: "50%",
+          }}
+        >
           <Button
             sx={{
               width: "91px",
+              maxWidth: "calc(100%-8px)",
               height: "40px",
               borderRadius: "1000px",
               backgroundColor: sortOpen

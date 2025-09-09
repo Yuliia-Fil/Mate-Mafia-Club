@@ -31,10 +31,7 @@ export const BackgroundProvider = ({
   }, [currentPath]);
 
   useEffect(() => {
-    console.log(document.documentElement.scrollHeight, "1");
-
     const observer = new MutationObserver(() => {
-      console.log(document.documentElement.scrollHeight);
       setElipses(createElipses(document.documentElement.scrollHeight));
     });
 
@@ -79,11 +76,14 @@ export const BackgroundProvider = ({
       <Box
         sx={{
           width: "100%",
-          maxWidth: "1122px",
+          maxWidth: "1300px",
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
-          padding: "48px 80px 0",
+          padding: {
+            xs: "48px 24px 0",
+            sm: "48px 60px 0",
+          },
           boxSizing: "border-box",
         }}
       >

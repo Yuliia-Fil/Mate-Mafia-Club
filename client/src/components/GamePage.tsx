@@ -18,7 +18,7 @@ export const GamePage = () => {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(164px, 1fr))",
         gap: "24px",
-        marginTop: "80px",
+        marginTop: { xs: "40px", sm: "80px" },
       }}
     >
       {cards.map((card, i) => (

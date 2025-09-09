@@ -58,26 +58,25 @@ export const HomePage = () => {
           bottom: "40px",
         }}
       >
-        {iconLinks.map((link) => {
+        {iconLinks.map(({ href, Icon }) => {
           return (
             <IconButton
-              key={link.href}
+              key={href}
               component="a"
-              href={link.href}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              color="primary"
               sx={{
                 transition: "all 0.3s ease",
-                width: "24px",
-                height: "24px",
+                fontSize: "24px",
+                color: "white",
                 "&:hover": {
                   boxShadow: "0 0 8px #ffffff80",
                   transform: "scale(1.1)",
                 },
               }}
             >
-              <img src={link.src} />
+              <Icon />
             </IconButton>
           );
         })}

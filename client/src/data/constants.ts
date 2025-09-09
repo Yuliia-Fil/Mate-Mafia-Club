@@ -1,6 +1,6 @@
-import facebook from "../assets/facebook.svg";
-import telegram from "../assets/telegram.svg";
-import instagram from "../assets/instagram.svg";
+import Facebook from "../assets/facebook.svg?react";
+import Telegram from "../assets/telegram.svg?react";
+import Instagram from "../assets/instagram.svg?react";
 
 export const paths = {
   HOME: "/",
@@ -19,9 +19,9 @@ export const navLinks = [
 ];
 
 export const iconLinks = [
-  { href: "https://facebook.com", src: facebook },
-  { href: "https://telegram", src: telegram },
-  { href: "https://instagram.com", src: instagram },
+  { href: "https://facebook.com", Icon: Facebook },
+  { href: "https://telegram", Icon: Telegram },
+  { href: "https://instagram.com", Icon: Instagram },
 ];
 
 export const rules = [

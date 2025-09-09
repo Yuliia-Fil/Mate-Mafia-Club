@@ -18,10 +18,10 @@ export const PlayersPage = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           columnGap: "16px",
           rowGap: "40px",
-          marginTop: "40px",
+          marginTop: { xs: "32px", sm: "40px" },
         }}
       >
         {players.map((player) => (

@@ -1,8 +1,9 @@
-import { AppBar, Box, Button, Typography } from "@mui/material";
+import { AppBar, Box, Button, IconButton, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { theme } from "../data/theme";
 import Logo from "../assets/logo.svg";
 import MMC from "../assets/mmc.svg";
+import Menu from "../assets/menu.svg?react";
 import { navLinks } from "../data/constants";
 
 export const Header = () => {
@@ -11,8 +12,16 @@ export const Header = () => {
       <Box
         sx={{
           display: "flex",
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          gap: "24px",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: {
+            xs: "left",
+            sm: "center",
+          },
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -26,7 +35,7 @@ export const Header = () => {
           <img src={MMC} alt="MMC" style={{ height: "18px", width: "72px" }} />
         </Box>
 
-        <Box sx={{ display: "flex", gap: "40px" }}>
+        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "40px" }}>
           {navLinks.map((link) => (
             <NavLink
               key={link.title}
@@ -64,23 +73,46 @@ export const Header = () => {
           ))}
         </Box>
 
-        <Button
-          component={NavLink}
-          to="/game"
+        <Box
           sx={{
-            textTransform: "none",
-            bgcolor: theme.palette.action.active,
-            width: "162px",
-            height: "42px",
-            color: theme.palette.text.primary,
-            borderRadius: "10000px",
-            "&:hover": {
-              bgcolor: theme.palette.action.hover,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: {
+              xs: "100%",
+              sm: "fit-content",
             },
           }}
         >
-          Почати гру
-        </Button>
+          <IconButton
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+              },
+            }}
+          >
+            <Menu />
+          </IconButton>
+
+          <Button
+            component={NavLink}
+            to="/game"
+            sx={{
+              textTransform: "none",
+              bgcolor: theme.palette.action.active,
+              width: "162px",
+              height: "42px",
+              color: theme.palette.text.primary,
+              borderRadius: "10000px",
+              "&:hover": {
+                bgcolor: theme.palette.action.hover,
+              },
+            }}
+          >
+            Почати гру
+          </Button>
+        </Box>
       </Box>
     </AppBar>
   );

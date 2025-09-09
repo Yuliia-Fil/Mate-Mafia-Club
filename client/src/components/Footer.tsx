@@ -14,11 +14,16 @@ export const Footer = ({ path }: { path: string }) => {
       <Box
         sx={{
           display: "flex",
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
+          gap: "16px",
           justifyContent: "space-between",
           alignItems: "center",
           borderTop: "1px solid #ffffff80",
-          paddingBlock: "56px",
-          marginTop: "120px",
+          paddingBlock: { xs: "18px", sm: "56px" },
+          marginTop: { xs: "48px", sm: "120px" },
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -32,7 +37,7 @@ export const Footer = ({ path }: { path: string }) => {
           <img src={MMC} alt="MMC" style={{ height: "18px", width: "72px" }} />
         </Box>
 
-        <Box sx={{ display: "flex", gap: "32px" }}>
+        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "32px" }}>
           {navLinks.map((link) => (
             <NavLink
               key={link.title}
@@ -61,25 +66,25 @@ export const Footer = ({ path }: { path: string }) => {
             gap: "24px",
           }}
         >
-          {iconLinks.map((link) => {
+          {iconLinks.map(({ href, Icon }) => {
             return (
               <IconButton
-                key={link.href}
+                key={href}
                 component="a"
-                href={link.href}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
                   transition: "all 0.3s ease",
-                  width: "24px",
-                  height: "24px",
+                  fontSize: { xs: "32px", sm: "24px" },
+                  color: "text.secondary",
                   "&:hover": {
                     boxShadow: "0 0 8px #ffffff80",
                     transform: "scale(1.1)",
                   },
                 }}
               >
-                <img src={link.src} />
+                <Icon />
               </IconButton>
             );
           })}
