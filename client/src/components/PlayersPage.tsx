@@ -20,7 +20,7 @@ export const PlayersPage = () => {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
           columnGap: "16px",
-          rowGap: "40px",
+          rowGap: { xs: "16px", sm: "24px", md: "32px" },
           marginTop: { xs: "32px", sm: "40px" },
         }}
       >

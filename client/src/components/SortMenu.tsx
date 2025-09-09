@@ -85,6 +85,7 @@ export const SortMenu = ({
               {form.options.map((option) => {
                 return (
                   <FormControlLabel
+                    key={option.label}
                     value={option.value}
                     control={<Radio />}
                     label={option.label}
