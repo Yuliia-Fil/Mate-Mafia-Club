@@ -81,8 +81,9 @@ export const BackgroundProvider = ({
           flexDirection: "column",
           minHeight: "100vh",
           padding: {
-            xs: "48px 24px 0",
-            sm: "48px 60px 0",
+            xs: "48px 16px 0",
+            sm: "48px 32px 0",
+            md: "48px 60px 0",
           },
           boxSizing: "border-box",
         }}

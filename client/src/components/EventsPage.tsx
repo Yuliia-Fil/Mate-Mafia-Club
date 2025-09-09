@@ -21,8 +21,8 @@ export const EventsPage = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "300px",
           margin: "80px 0",
+          gap: { xs: "140px", sm: "140px", md: "100px" },
         }}
       >
         {events.map((event) => (
