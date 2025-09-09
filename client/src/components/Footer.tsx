@@ -26,7 +26,14 @@ export const Footer = ({ path }: { path: string }) => {
           marginTop: { xs: "48px", sm: "120px" },
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+            flex: { xs: 1, sm: 1, md: "unset" },
+          }}
+        >
           <NavLink to="/">
             <img
               src={Logo}
@@ -37,7 +44,14 @@ export const Footer = ({ path }: { path: string }) => {
           <img src={MMC} alt="MMC" style={{ height: "18px", width: "72px" }} />
         </Box>
 
-        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "32px" }}>
+        <Box
+          sx={{
+            display: { xs: "none", sm: "none", md: "flex" },
+            gap: "32px",
+            flex: { xs: 1, sm: 1, md: "unset" },
+            justifyContent: "center",
+          }}
+        >
           {navLinks.map((link) => (
             <NavLink
               key={link.title}
@@ -64,6 +78,8 @@ export const Footer = ({ path }: { path: string }) => {
           sx={{
             display: "flex",
             gap: "24px",
+            flex: { xs: 1, sm: 1, md: "unset" },
+            justifyContent: "center",
           }}
         >
           {iconLinks.map(({ href, Icon }) => {
@@ -76,8 +92,8 @@ export const Footer = ({ path }: { path: string }) => {
                 rel="noopener noreferrer"
                 sx={{
                   transition: "all 0.3s ease",
-                  fontSize: { xs: "32px", sm: "24px" },
                   color: "text.secondary",
+                  padding: 0,
                   "&:hover": {
                     boxShadow: "0 0 8px #ffffff80",
                     transform: "scale(1.1)",
@@ -93,11 +109,15 @@ export const Footer = ({ path }: { path: string }) => {
           href="https://maps.app.goo.gl/poUam3pb8SnMtidJ6"
           underline="hover"
           color="text.secondary"
+          flex="1"
+          display={"flex"}
+          justifyContent={"right"}
+          sx={{ flex: { xs: 1, sm: 1, md: "unset" } }}
         >
           <Typography
             variant="body2"
             component="span"
-            sx={{ fontSize: "18px" }}
+            sx={{ fontSize: { xs: "14px", sm: "14px", md: "18px" } }}
           >
             м. Київ, Мафіозний узвіз, 13
           </Typography>

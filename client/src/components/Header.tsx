@@ -14,13 +14,15 @@ export const Header = () => {
           display: "flex",
           flexDirection: {
             xs: "column",
-            sm: "row",
+            sm: "column",
+            md: "row",
           },
           gap: "24px",
           justifyContent: "space-between",
           alignItems: {
             xs: "left",
-            sm: "center",
+            sm: "left",
+            md: "center",
           },
         }}
       >
@@ -35,7 +37,9 @@ export const Header = () => {
           <img src={MMC} alt="MMC" style={{ height: "18px", width: "72px" }} />
         </Box>
 
-        <Box sx={{ display: { xs: "none", sm: "flex" }, gap: "40px" }}>
+        <Box
+          sx={{ display: { xs: "none", sm: "none", md: "flex" }, gap: "40px" }}
+        >
           {navLinks.map((link) => (
             <NavLink
               key={link.title}
@@ -80,7 +84,8 @@ export const Header = () => {
             justifyContent: "space-between",
             width: {
               xs: "100%",
-              sm: "fit-content",
+              sm: "100%",
+              md: "fit-content",
             },
           }}
         >
@@ -88,7 +93,8 @@ export const Header = () => {
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                sm: "block",
+                md: "none",
               },
             }}
           >

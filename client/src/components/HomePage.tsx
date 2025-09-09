@@ -70,6 +70,7 @@ export const HomePage = () => {
                 transition: "all 0.3s ease",
                 fontSize: "24px",
                 color: "white",
+                padding: 0,
                 "&:hover": {
                   boxShadow: "0 0 8px #ffffff80",
                   transform: "scale(1.1)",
