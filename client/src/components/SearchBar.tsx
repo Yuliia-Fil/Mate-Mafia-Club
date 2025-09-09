@@ -7,6 +7,7 @@ import search from "../assets/search.svg";
 import { useLocation } from "react-router-dom";
 import { eventsSortFields, paths, playersSortFields } from "../data/constants";
 import { SortMenu } from "./SortMenu";
+import { FilterMenu } from "./FilterMenu";
 
 export const SearchBar = () => {
   const currentPath = useLocation().pathname;
@@ -82,7 +83,7 @@ export const SearchBar = () => {
                 }}
               />
             </Button>
-            {/* {filterOpen && <FilterMenu />} */}
+            {filterOpen && <FilterMenu setFilterOpen={setFilterOpen} />}
           </Box>
         )}
         <Box position="relative">
