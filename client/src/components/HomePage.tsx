@@ -1,61 +1,76 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { iconLinks, paths } from "../data/constants";
+import ArrowRight from "../assets/arrowright.svg?react";
 
 export const HomePage = () => {
   return (
     <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      position="relative"
-      width="100%"
-      height="100%"
-      marginTop="150px"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        width: "100%",
+        height: "100%",
+        paddingBottom: { xs: "80px", sm: "56px", md: "40px" },
+      }}
     >
       <Box
         sx={{
           display: "flex",
-          gap: "16px",
+          gap: { xs: "32px", sm: "40px", md: "40px" },
           flexDirection: "column",
           alignItems: "center",
-          marginBottom: "45px",
-          width: "100%",
+          margin: "auto 0",
         }}
       >
         <Typography
-          variant="h1"
+          variant="inherit"
           sx={{
-            fontSize: "100px",
+            fontFamily: "'Playfair Display', serif",
+            fontSize: { xs: "56px", sm: "75px", md: "100px" },
+            fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: "5%",
+            textAlign: "center",
           }}
         >
           Mate Mafia Club
         </Typography>
-        <Typography variant="body2" display="block" width="55%">
+        <Typography
+          variant="body2"
+          display="block"
+          width="60%"
+          textAlign="center"
+        >
           Збирайте друзів, створюйте кімнати та дізнайтесь, хто з вас справжній
           мафіозі.
         </Typography>
+        <Button
+          variant="text"
+          color="primary"
+          component={NavLink}
+          to={paths.RULES}
+          sx={{
+            borderRadius: "1000px",
+            textTransform: "none",
+            marginTop: "8px",
+            fontSize: "18px",
+            lineHeight: "24px",
+            display: "flex",
+            gap: "16px",
+            padding: "20px",
+          }}
+        >
+          Дізнатися більше
+          <ArrowRight />
+        </Button>
       </Box>
-      <Button
-        variant="outlined"
-        color="primary"
-        component={NavLink}
-        to={paths.RULES}
-        sx={{
-          borderRadius: "1000px",
-          textTransform: "none",
-        }}
-      >
-        Дізнатися більше
-      </Button>
       <Box
         sx={{
           display: "flex",
           gap: "24px",
-          position: "absolute",
-          bottom: "40px",
         }}
       >
         {iconLinks.map(({ href, Icon }) => {
