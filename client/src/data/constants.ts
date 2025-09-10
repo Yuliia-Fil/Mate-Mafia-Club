@@ -131,13 +131,13 @@ export const playersSortFields = [
     label: "За імʼям",
     options: [
       { label: "А-Я", value: "ascName" },
-      { label: "Я-А", value: "decName" },
+      { label: "Я-А", value: "descName" },
     ],
   },
   {
     label: "За нікнеймом",
     options: [
-      { label: "А-Я", value: "acsNick" },
+      { label: "А-Я", value: "ascNick" },
       { label: "Я-А", value: "descNick" },
     ],
   },
