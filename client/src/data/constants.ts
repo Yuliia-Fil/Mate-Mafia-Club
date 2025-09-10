@@ -147,17 +147,17 @@ export const eventsFilterFields = [
   {
     label: "Тип події",
     options: [
-      { label: "Вечірка", value: "party" },
-      { label: "Експеримент", value: "experimental" },
-      { label: "Змагання", value: "tournament" },
+      { label: "Вечірка", value: "type_party" },
+      { label: "Експеримент", value: "type_experimental" },
+      { label: "Змагання", value: "type_tournament" },
     ],
   },
   {
     label: "Дата",
     options: [
-      { label: "Сьогодні", value: "day" },
-      { label: "Цього тижня", value: "week" },
-      { label: "Цього місяця", value: "month" },
+      { label: "Сьогодні", value: "date_day" },
+      { label: "Цього тижня", value: "date_week" },
+      { label: "Цього місяця", value: "date_month" },
     ],
   },
 ];

@@ -29,10 +29,9 @@ export const FilterMenu = ({
 
   const handleOk = () => {
     const newParams = new URLSearchParams(searchParams);
+    newParams.delete(`${pageKey}_filter`);
     selectedValues.forEach((value) => {
-      if (!newParams.has(`${pageKey}_filter`, value)) {
-        newParams.append(`${pageKey}_filter`, value);
-      }
+      newParams.append(`${pageKey}_filter`, value);
     });
     setSearchParams(newParams);
     setFilterOpen(false);

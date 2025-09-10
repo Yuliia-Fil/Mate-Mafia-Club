@@ -9,6 +9,7 @@ import { paths } from "./data/constants";
 import { PlayersPage } from "./components/PlayersPage";
 import { GamePage } from "./components/GamePage";
 import { RulesPage } from "./components/RulesPage";
+import { Box } from "@mui/material";
 
 export const App = () => {
   const path = useLocation().pathname;
@@ -17,13 +18,15 @@ export const App = () => {
     <BackgroundProvider>
       <Header />
       <PageTitle path={path} />
-      <Routes>
-        <Route path={paths.HOME} element={<HomePage />}></Route>
-        <Route path={paths.EVENTS} element={<EventsPage />}></Route>
-        <Route path={paths.PLAYERS} element={<PlayersPage />}></Route>
-        <Route path={paths.GAME} element={<GamePage />}></Route>
-        <Route path={paths.RULES} element={<RulesPage />}></Route>
-      </Routes>
+      <Box sx={{ flex: 1 }}>
+        <Routes>
+          <Route path={paths.HOME} element={<HomePage />}></Route>
+          <Route path={paths.EVENTS} element={<EventsPage />}></Route>
+          <Route path={paths.PLAYERS} element={<PlayersPage />}></Route>
+          <Route path={paths.GAME} element={<GamePage />}></Route>
+          <Route path={paths.RULES} element={<RulesPage />}></Route>
+        </Routes>
+      </Box>
       <Footer path={path} />
     </BackgroundProvider>
   );

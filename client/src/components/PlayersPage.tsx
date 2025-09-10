@@ -68,7 +68,7 @@ export const PlayersPage = () => {
       ) : (
         <Typography
           variant="body1"
-          sx={{ textAlign: "center", marginTop: "24px" }}
+          sx={{ textAlign: "center", marginTop: "48px" }}
         >
           Гравців за заданими вами параметрами не знайдено
         </Typography>

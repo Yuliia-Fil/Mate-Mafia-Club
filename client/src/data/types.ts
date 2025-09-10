@@ -3,6 +3,7 @@ export type Event = {
   description: string;
   date: string;
   imgUrl: string;
+  type: "party" | "tournament" | "experiment";
 };
 
 export type RoleCard = {
