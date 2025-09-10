@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { theme } from "../data/theme";
 import Logo from "../assets/logo.svg";
@@ -7,6 +7,7 @@ import Menu from "../assets/menu.svg?react";
 import { navLinks } from "../data/constants";
 import { useState } from "react";
 import { BurgerMenu } from "./BurgerMenu";
+import { StartGameButton } from "./StartGameButton";
 
 export const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -113,24 +114,7 @@ export const Header = () => {
             >
               <Menu />
             </IconButton>
-
-            <Button
-              component={NavLink}
-              to="/game"
-              sx={{
-                textTransform: "none",
-                bgcolor: theme.palette.action.active,
-                width: "162px",
-                height: "42px",
-                color: theme.palette.text.primary,
-                borderRadius: "10000px",
-                "&:hover": {
-                  bgcolor: theme.palette.action.hover,
-                },
-              }}
-            >
-              Почати гру
-            </Button>
+            <StartGameButton />
           </Box>
         </Box>
       </AppBar>
