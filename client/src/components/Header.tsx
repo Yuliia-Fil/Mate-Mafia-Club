@@ -5,121 +5,136 @@ import Logo from "../assets/logo.svg";
 import MMC from "../assets/mmc.svg";
 import Menu from "../assets/menu.svg?react";
 import { navLinks } from "../data/constants";
+import { useState } from "react";
+import { BurgerMenu } from "./BurgerMenu";
 
 export const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <AppBar position="static" color="transparent" elevation={0}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "column",
-            sm: "column",
-            md: "row",
-          },
-          gap: "24px",
-          justifyContent: "space-between",
-          alignItems: {
-            xs: "left",
-            sm: "left",
-            md: "center",
-          },
-        }}
-      >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <NavLink to="/">
-            <img
-              src={Logo}
-              alt="Logo"
-              style={{ height: "21px", width: "24px" }}
-            />
-          </NavLink>
-          <img src={MMC} alt="MMC" style={{ height: "18px", width: "72px" }} />
-        </Box>
-
-        <Box
-          sx={{ display: { xs: "none", sm: "none", md: "flex" }, gap: "40px" }}
-        >
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.title}
-              to={link.href}
-              style={{ textDecoration: "none" }}
-              className={({ isActive }) => (isActive ? "active" : "")}
-            >
-              <Typography
-                className="active"
-                sx={{
-                  position: "relative",
-                  color: theme.palette.text.primary,
-                  fontFamily: theme.typography.fontFamily,
-                  fontSize: "18px",
-                  fontWeight: 300,
-                  "&::after": {
-                    content: "''",
-                    position: "absolute",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    transition: "width 0.3s ease",
-                    bottom: "-12px",
-                    width: 0,
-                    height: "1px",
-                    backgroundColor: theme.palette.text.primary,
-                  },
-                  "&:hover::after": {
-                    width: "42px",
-                  },
-                }}
-              >
-                {link.title}
-              </Typography>
-            </NavLink>
-          ))}
-        </Box>
-
+    <>
+      <AppBar position="static" color="transparent" elevation={0}>
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
+            flexDirection: {
+              xs: "column",
+              sm: "column",
+              md: "row",
+            },
+            gap: "24px",
             justifyContent: "space-between",
-            width: {
-              xs: "100%",
-              sm: "100%",
-              md: "fit-content",
+            alignItems: {
+              xs: "left",
+              sm: "left",
+              md: "center",
             },
           }}
         >
-          <IconButton
-            sx={{
-              display: {
-                xs: "block",
-                sm: "block",
-                md: "none",
-              },
-            }}
-          >
-            <Menu />
-          </IconButton>
+          <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <NavLink to="/">
+              <img
+                src={Logo}
+                alt="Logo"
+                style={{ height: "21px", width: "24px" }}
+              />
+            </NavLink>
+            <img
+              src={MMC}
+              alt="MMC"
+              style={{ height: "18px", width: "72px" }}
+            />
+          </Box>
 
-          <Button
-            component={NavLink}
-            to="/game"
+          <Box
             sx={{
-              textTransform: "none",
-              bgcolor: theme.palette.action.active,
-              width: "162px",
-              height: "42px",
-              color: theme.palette.text.primary,
-              borderRadius: "10000px",
-              "&:hover": {
-                bgcolor: theme.palette.action.hover,
+              display: { xs: "none", sm: "none", md: "flex" },
+              gap: "40px",
+            }}
+          >
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.title}
+                to={link.href}
+                style={{ textDecoration: "none" }}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                <Typography
+                  className="active"
+                  sx={{
+                    position: "relative",
+                    color: theme.palette.text.primary,
+                    fontFamily: theme.typography.fontFamily,
+                    fontSize: "18px",
+                    fontWeight: 300,
+                    "&::after": {
+                      content: "''",
+                      position: "absolute",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      transition: "width 0.3s ease",
+                      bottom: "-12px",
+                      width: 0,
+                      height: "1px",
+                      backgroundColor: theme.palette.text.primary,
+                    },
+                    "&:hover::after": {
+                      width: "42px",
+                    },
+                  }}
+                >
+                  {link.title}
+                </Typography>
+              </NavLink>
+            ))}
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: {
+                xs: "100%",
+                sm: "100%",
+                md: "fit-content",
               },
             }}
           >
-            Почати гру
-          </Button>
+            <IconButton
+              sx={{
+                display: {
+                  xs: "block",
+                  sm: "block",
+                  md: "none",
+                },
+              }}
+              onClick={() => setMenuOpen(true)}
+            >
+              <Menu />
+            </IconButton>
+
+            <Button
+              component={NavLink}
+              to="/game"
+              sx={{
+                textTransform: "none",
+                bgcolor: theme.palette.action.active,
+                width: "162px",
+                height: "42px",
+                color: theme.palette.text.primary,
+                borderRadius: "10000px",
+                "&:hover": {
+                  bgcolor: theme.palette.action.hover,
+                },
+              }}
+            >
+              Почати гру
+            </Button>
+          </Box>
         </Box>
-      </Box>
-    </AppBar>
+      </AppBar>
+      <BurgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+    </>
   );
 };
