@@ -10,14 +10,52 @@ import {
 import { theme } from "../data/theme";
 import FilterIcon from "../assets/filterIcon.svg?react";
 import CloseIcon from "../assets/closeIcon.svg?react";
-import { type Dispatch, type SetStateAction } from "react";
+import { useState, type Dispatch, type SetStateAction } from "react";
 import { eventsFilterFields } from "../data/constants";
+import { useSearchParams } from "react-router-dom";
+import type { PageKey } from "../data/types";
 
 export const FilterMenu = ({
   setFilterOpen,
+  pageKey,
 }: {
   setFilterOpen: Dispatch<SetStateAction<boolean>>;
+  pageKey: PageKey;
 }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedValues, setSelectedValues] = useState(
+    searchParams.getAll(`${pageKey}_filter`)
+  );
+
+  const handleOk = () => {
+    const newParams = new URLSearchParams(searchParams);
+    selectedValues.forEach((value) => {
+      if (!newParams.has(`${pageKey}_filter`, value)) {
+        newParams.append(`${pageKey}_filter`, value);
+      }
+    });
+    setSearchParams(newParams);
+    setFilterOpen(false);
+  };
+
+  const handleReset = () => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete(`${pageKey}_filter`);
+    setSearchParams(newParams);
+    setSelectedValues([]);
+    setFilterOpen(false);
+  };
+
+  const handleChange = (value: string) => {
+    if (selectedValues.includes(value)) {
+      setSelectedValues((prev) => prev.filter((el) => el !== value));
+    } else {
+      const newSelectedValues = [...selectedValues];
+      newSelectedValues.push(value);
+      setSelectedValues(newSelectedValues);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -73,7 +111,12 @@ export const FilterMenu = ({
             </FormLabel>
             {f.options.map((o) => (
               <FormControlLabel
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    checked={selectedValues.includes(o.value)}
+                    onChange={() => handleChange(o.value)}
+                  />
+                }
                 label={o.label}
                 sx={{
                   "& .MuiFormControlLabel-label": {
@@ -96,9 +139,7 @@ export const FilterMenu = ({
             lineHeight: "24px",
             width: "50%",
           }}
-          onClick={() => {
-            setFilterOpen(false);
-          }}
+          onClick={handleReset}
         >
           Cкинути
         </Button>
@@ -111,6 +152,7 @@ export const FilterMenu = ({
             bgcolor: theme.palette.action.active,
             width: "50%",
           }}
+          onClick={handleOk}
         >
           Ок
         </Button>

@@ -1,15 +1,16 @@
-import { Box, Button, InputAdornment, TextField } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { theme } from "../data/theme";
 import { useState } from "react";
 import SortIcon from "../assets/sortIcon.svg?react";
 import FilterIcon from "../assets/filterIcon.svg?react";
-import search from "../assets/search.svg";
 import { useLocation } from "react-router-dom";
 import { eventsSortFields, paths, playersSortFields } from "../data/constants";
 import { SortMenu } from "./SortMenu";
 import { FilterMenu } from "./FilterMenu";
+import type { PageKey } from "../data/types";
+import { QueryMenu } from "./QueryMenu";
 
-export const SearchBar = () => {
+export const SearchBar = ({ pageKey }: { pageKey: PageKey }) => {
   const currentPath = useLocation().pathname;
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
@@ -24,41 +25,7 @@ export const SearchBar = () => {
         gap: "16px",
       }}
     >
-      <TextField
-        variant="outlined"
-        placeholder="Пошук..."
-        sx={{
-          width: "214px",
-          maxWidth: "50%",
-          "& .MuiOutlinedInput-root": {
-            height: "45px",
-            backgroundColor: theme.palette.background.paper,
-            borderRadius: "1000px",
-            boxSizing: "border-box",
-            "& fieldset": {
-              borderColor: theme.palette.text.secondary,
-            },
-            "& input": {
-              padding: "0 8px",
-              color: theme.palette.text.primary,
-              "&::placeholder": {
-                fontFamily: "Inter, sans-serif",
-                fontSize: "16px",
-                fontWeight: 400,
-                color: theme.palette.text.primary,
-                opacity: 1,
-              },
-            },
-          },
-        }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <img src={search} />
-            </InputAdornment>
-          ),
-        }}
-      />
+      <QueryMenu pageKey={pageKey} />
       <Box
         sx={{
           display: "flex",
@@ -95,7 +62,9 @@ export const SearchBar = () => {
                 }}
               />
             </Button>
-            {filterOpen && <FilterMenu setFilterOpen={setFilterOpen} />}
+            {filterOpen && (
+              <FilterMenu pageKey={pageKey} setFilterOpen={setFilterOpen} />
+            )}
           </Box>
         )}
         <Box
@@ -135,6 +104,7 @@ export const SearchBar = () => {
                   : playersSortFields
               }
               setSortOpen={setSortOpen}
+              pageKey={pageKey}
             />
           )}
         </Box>

@@ -16,7 +16,7 @@ export const EventsPage = () => {
 
   return (
     <Box>
-      <SearchBar />
+      <SearchBar pageKey="events" />
       <Box
         sx={{
           display: "flex",

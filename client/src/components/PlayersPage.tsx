@@ -14,7 +14,7 @@ export const PlayersPage = () => {
   }, []);
   return (
     <Box>
-      <SearchBar />
+      <SearchBar pageKey="players" />
       <Box
         sx={{
           display: "grid",

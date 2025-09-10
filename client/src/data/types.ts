@@ -36,3 +36,5 @@ export type Form = {
   label: string;
   options: Option[];
 };
+
+export type PageKey = "players" | "events";

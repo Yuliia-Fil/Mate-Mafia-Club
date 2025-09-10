@@ -11,17 +11,41 @@ import {
 import { theme } from "../data/theme";
 import SortIcon from "../assets/sortIcon.svg?react";
 import CloseIcon from "../assets/closeIcon.svg?react";
-import type { Form } from "../data/types";
+import type { Form, PageKey } from "../data/types";
 import { useState, type Dispatch, type SetStateAction } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const SortMenu = ({
   forms,
   setSortOpen,
+  pageKey,
 }: {
   forms: Form[];
   setSortOpen: Dispatch<SetStateAction<boolean>>;
+  pageKey: PageKey;
 }) => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedValue, setSelectedValue] = useState(
+    searchParams.get(`${pageKey}_sort`)
+  );
+
+  const handleOk = () => {
+    const newParams = new URLSearchParams(searchParams);
+    if (selectedValue) {
+      newParams.set(`${pageKey}_sort`, selectedValue);
+    }
+    setSearchParams(newParams);
+    setSortOpen(false);
+  };
+
+  const handleReset = () => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete(`${pageKey}_sort`);
+    setSearchParams(newParams);
+    setSelectedValue(null);
+    setSortOpen(false);
+  };
+
   return (
     <Box
       sx={{
@@ -111,10 +135,7 @@ export const SortMenu = ({
             lineHeight: "24px",
             width: "50%",
           }}
-          onClick={() => {
-            setSortOpen(false);
-            setSelectedValue("");
-          }}
+          onClick={handleReset}
         >
           Cкинути
         </Button>
@@ -127,6 +148,7 @@ export const SortMenu = ({
             bgcolor: theme.palette.action.active,
             width: "50%",
           }}
+          onClick={handleOk}
         >
           Ок
         </Button>
