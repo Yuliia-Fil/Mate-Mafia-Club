@@ -9,7 +9,7 @@ import "../index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router basename="/Mate-Mafia-Club/">
+    <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <App />
