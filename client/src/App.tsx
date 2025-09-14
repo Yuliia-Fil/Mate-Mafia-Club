@@ -1,35 +1,33 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { BackgroundProvider } from "./components/BackgroundProvider/BackgroundProvider";
+import { Header } from "./components/Header";
+import { HomePage } from "./components/HomePage";
+import { EventsPage } from "./components/EventsPage";
+import { PageTitle } from "./components/PageTitle";
+import { Footer } from "./components/Footer";
+import { paths } from "./data/constants";
+import { PlayersPage } from "./components/PlayersPage";
+import { GamePage } from "./components/GamePage";
+import { RulesPage } from "./components/RulesPage";
+import { Box } from "@mui/material";
 
-function App() {
-  const [count, setCount] = useState(0);
+export const App = () => {
+  const path = useLocation().pathname;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count} ALLO
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BackgroundProvider>
+      <Header />
+      <PageTitle path={path} />
+      <Box sx={{ flex: 1 }}>
+        <Routes>
+          <Route path={paths.HOME} element={<HomePage />}></Route>
+          <Route path={paths.EVENTS} element={<EventsPage />}></Route>
+          <Route path={paths.PLAYERS} element={<PlayersPage />}></Route>
+          <Route path={paths.GAME} element={<GamePage />}></Route>
+          <Route path={paths.RULES} element={<RulesPage />}></Route>
+        </Routes>
+      </Box>
+      <Footer path={path} />
+    </BackgroundProvider>
   );
-}
-
-export default App;
+};
