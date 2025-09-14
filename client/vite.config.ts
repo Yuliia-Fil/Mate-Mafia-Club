@@ -4,6 +4,6 @@ import svgr from "vite-plugin-svgr";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/Mate-Mafia-Club/",
+  //   base: "/Mate-Mafia-Club/",
   plugins: [react(), svgr()],
 });
