@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:17
+    container_name: mafia_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mate_mafia
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./Server
+    container_name: mafia_backend
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - ./Server/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./Server/app:/app/app
+
+  frontend:
+    build: ./Client
+    container_name: mafia_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:
