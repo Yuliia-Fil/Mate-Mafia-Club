@@ -26,7 +26,7 @@ export const PlayerCard = ({ player }: { player: Player }) => {
           margin: "0 auto 20px",
         }}
         alt={player.name}
-        src={`http://127.0.0.1:8000${player.avatarUrl}`}
+        src={`http://3.120.199.183/${player.avatarUrl}`}
       ></Avatar>
       <Box>
         <Typography marginBottom="10px" fontSize="15px" fontWeight={600}>
