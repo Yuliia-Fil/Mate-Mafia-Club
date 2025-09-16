@@ -3,7 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yuliia-fil.github.io/Mate-Mafia-Club",
   "scripts": {
     "start": "vite --open",
     "build": "tsc -b && vite build",
