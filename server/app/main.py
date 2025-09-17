@@ -98,14 +98,15 @@ class Rule(BaseModel):
 
 # --- Ініціалізація FastAPI ---
 app = FastAPI(
-    openapi_url="/api/openapi.json",  # OpenAPI JSON
-    docs_url="/api/docs"              # Swagger UI
+    openapi_url="/api/openapi.json",
+    docs_url="/api/docs",
+    openapi_version="3.0.3"
 )
 
 # --- CORS ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://3.120.199.183"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -345,7 +346,7 @@ def seed_all():
 # Виклик
 seed_all()
 
-BASE_URL = "http://3.120.199.183:8000"
+BASE_URL = "http://3.120.199.183"
 
 # --- Події ---
 @app.get("/events/", response_model=List[Event])
