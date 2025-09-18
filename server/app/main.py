@@ -98,9 +98,10 @@ class Rule(BaseModel):
 
 # --- Ініціалізація FastAPI ---
 app = FastAPI(
-    openapi_url="/api/openapi.json",
-    docs_url="/api/docs",
-    openapi_version="3.0.3"
+    title="Mate Mafia Club API",
+    docs_url="/docs",      # стандартний Swagger UI
+    redoc_url="/redoc",    # ReDoc
+    openapi_url="/api/openapi.json"
 )
 
 # --- CORS ---
@@ -346,10 +347,10 @@ def seed_all():
 # Виклик
 seed_all()
 
-BASE_URL = "http://3.120.199.183"
+BASE_URL = "https://mate-mafia-club-0mq7.onrender.com"
 
 # --- Події ---
-@app.get("/events/", response_model=List[Event])
+@app.get("/events", response_model=List[Event])
 def get_events(db: Session = Depends(get_db)):
     events = crud.get_events(db)
     for e in events:
@@ -366,7 +367,7 @@ def get_event(event_id: int, db: Session = Depends(get_db)):
         event.imgUrl = f"{BASE_URL}/uploads/{event.imgUrl.lstrip('/')}"
     return event
 
-@app.post("/events/", response_model=Event)
+@app.post("/events", response_model=Event)
 def create_event_endpoint(event: EventBase, db: Session = Depends(get_db)):
     db_event = crud.create_event(
         db,
@@ -397,7 +398,7 @@ def delete_event(event_id: int, db: Session = Depends(get_db)):
     return {"detail": "Event deleted"}
 
 # --- Гравці ---
-@app.get("/players/", response_model=List[PlayerOut])
+@app.get("/players", response_model=List[PlayerOut])
 def get_players(db: Session = Depends(get_db)):
     players = crud.get_players(db)
     for p in players:
@@ -450,7 +451,7 @@ def delete_player(player_id: int, db: Session = Depends(get_db)):
     return {"detail": "Player deleted"}
 
 # --- Медіа ---
-@app.get("/media/", response_model=List[Media])
+@app.get("/media", response_model=List[Media])
 def get_media(db: Session = Depends(get_db)):
     media_list = crud.get_media(db)
     for m in media_list:
@@ -467,7 +468,7 @@ def get_media_item(media_id: int, db: Session = Depends(get_db)):
         media.url = f"{BASE_URL}/uploads/{os.path.basename(media.url)}"
     return media
 
-@app.post("/media/", response_model=Media)
+@app.post("/media", response_model=Media)
 async def upload_media(file: UploadFile = File(...), description: str = None, db: Session = Depends(get_db)):
     file_location = os.path.join(UPLOAD_DIR, file.filename)
     with open(file_location, "wb") as f:
@@ -497,7 +498,7 @@ def delete_media(media_id: int, db: Session = Depends(get_db)):
     return {"detail": "Media deleted"}
 
 # --- Правила ---
-@app.get("/rules/", response_model=List[Rule])
+@app.get("/rules", response_model=List[Rule])
 def get_rules(db: Session = Depends(get_db)):
     rules = crud.get_rules(db)
     # Формуємо повний URL для зображень/файлів
@@ -519,7 +520,7 @@ def get_rule(rule_id: int, db: Session = Depends(get_db)):
         rule.image_filename = f"{BASE_URL}/uploads/{rule.image_filename.lstrip('/')}"
     return rule
 
-@app.post("/rules/", response_model=Rule)
+@app.post("/rules", response_model=Rule)
 async def upload_rule(title: str, description: str = None,
                       pdf: UploadFile = File(None), image: UploadFile = File(None),
                       db: Session = Depends(get_db)):
@@ -555,7 +556,7 @@ def delete_rule(rule_id: int, db: Session = Depends(get_db)):
     return {"detail": "Rule deleted"}
 
 # --- Картки ---
-@app.get("/cards/", response_model=List[Card])
+@app.get("/cards", response_model=List[Card])
 def get_cards(db: Session = Depends(get_db)):
     cards = crud.get_cards(db)
     for card in cards:
@@ -563,7 +564,7 @@ def get_cards(db: Session = Depends(get_db)):
             card.imgUrl = f"{BASE_URL}/uploads/{card.imgUrl.lstrip('/')}"
     return cards
 
-@app.get("/cards/random/", response_model=List[Card])
+@app.get("/cards/random", response_model=List[Card])
 def get_random_cards():
     expanded = []
     for c in cards_data:
@@ -588,7 +589,7 @@ def get_card(card_id: str, db: Session = Depends(get_db)):
         card.imgUrl = f"{BASE_URL}/uploads/{card.imgUrl.lstrip('/')}"
     return card
 
-@app.post("/cards/", response_model=Card)
+@app.post("/cards", response_model=Card)
 def create_card_endpoint(card: CardBase, db: Session = Depends(get_db)):
     return crud.create_card(
         db,
