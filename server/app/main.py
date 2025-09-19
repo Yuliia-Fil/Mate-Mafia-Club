@@ -347,7 +347,7 @@ def seed_all():
 # Виклик
 seed_all()
 
-BASE_URL = "https://mate-mafia-club-0mq7.onrender.com"
+BASE_URL = "https://mate-mafia-club-1.onrender.com"
 
 # --- Події ---
 @app.get("/events", response_model=List[Event])

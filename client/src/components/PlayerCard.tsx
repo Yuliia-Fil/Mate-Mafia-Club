@@ -26,7 +26,7 @@ export const PlayerCard = ({ player }: { player: Player }) => {
           margin: "0 auto 20px",
         }}
         alt={player.name}
-        src={`${import.meta.env.VITE_API_URL}/${player.avatarUrl}`}
+        src={`${import.meta.env.VITE_FRONT_URL}/${player.avatarUrl}`}
       ></Avatar>
       <Box>
         <Typography marginBottom="10px" fontSize="15px" fontWeight={600}>
