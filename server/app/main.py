@@ -403,7 +403,9 @@ def get_players(db: Session = Depends(get_db)):
     players = crud.get_players(db)
     for p in players:
         if p.avatarUrl:
-            p.avatarUrl = f"{BASE_URL}/uploads/{p.avatarUrl.lstrip('/')}"
+            # Додаємо BASE_URL лише якщо avatarUrl не починається з http
+            if not p.avatarUrl.startswith("http"):
+                p.avatarUrl = f"{BASE_URL}/uploads/{p.avatarUrl.lstrip('/')}"
     return players
 
 @app.get("/players/{player_id}", response_model=PlayerOut)
@@ -412,7 +414,8 @@ def get_player(player_id: int, db: Session = Depends(get_db)):
     if not player:
         raise HTTPException(status_code=404, detail="Player not found")
     if player.avatarUrl:
-        player.avatarUrl = f"{BASE_URL}/uploads/{player.avatarUrl.lstrip('/')}"
+        if not player.avatarUrl.startswith("http"):
+            player.avatarUrl = f"{BASE_URL}/uploads/{player.avatarUrl.lstrip('/')}"
     return player
 
 @app.post("/players/{player_id}/avatar")
@@ -422,12 +425,13 @@ async def upload_avatar(player_id: int, file: UploadFile = File(...), db: Sessio
     with open(file_path, "wb") as buffer:
         buffer.write(await file.read())
 
-    avatar_url = f"{BASE_URL}/uploads/{filename}"
-    player = crud.update_player(db, player_id, avatarUrl=avatar_url)
+    # Зберігаємо тільки шлях у базі, щоб не дублювався BASE_URL
+    avatar_path = f"uploads/{filename}"
+    player = crud.update_player(db, player_id, avatarUrl=avatar_path)
     if not player:
         raise HTTPException(status_code=404, detail="Player not found")
 
-    return {"avatarUrl": avatar_url}
+    return {"avatarUrl": f"{BASE_URL}/{avatar_path}"}
 
 @app.put("/players/{player_id}", response_model=PlayerOut)
 def update_player_endpoint(player_id: int, player: PlayerBase, db: Session = Depends(get_db)):
