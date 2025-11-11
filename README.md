@@ -47,16 +47,6 @@ The website is fully **responsive**, providing an intuitive and user-friendly in
 
 ---
 
-## 🚀 Getting Started
-
-To run the project locally:
-
-## **Clone the repository**
-
-   ``bash
-   git clone https://github.com/Yuliia-Fil/Mate-Mafia-Club.git
-   cd mafia-club ``
-
 # 👩‍💻 Team & Contact
 
 - Backend Developer: Alena Tsapenko
