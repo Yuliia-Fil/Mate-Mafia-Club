@@ -1,67 +1,68 @@
-# Mafia Club
+# 🎭 Mafia Club
 
-[Visit the website](https://mate-mafia-club-1.onrender.com)
+[🌐 Visit the website](https://mate-mafia-club-1.onrender.com)
 
-**Mafia Club** is an online platform for playing the social game *Mafia*, allowing users to create game rooms, join sessions, and interact with other players in real-time.
-
----
-
-## Project Overview
-
-The project is designed for fans of the social deduction game **Mafia**. Key features include:
-
-- Creating and joining game rooms.
-- Playing online games with other users.
-- Tracking player rankings and statistics.
-- Real-time interaction and communication between participants.
-
-The website is fully responsive, providing an intuitive and user-friendly interface across different devices.
+**Mafia Club** is an online platform for playing the social game *Mafia*, allowing users to create game rooms, join sessions, and interact with other players in real-time.  
+This project was developed as a **team project**, with **backend development handled by me**. Frontend and design were implemented by another team member.
 
 ---
 
-## Technologies Used
+## 🔹 Project Overview
 
-- **Frontend:** HTML, CSS, JavaScript, React  
-- **Backend:** Node.js, Express  
-- **Real-time Communication:** Socket.IO  
-- **Database:** MongoDB  
+**Mafia Club** is designed for fans of the social deduction game **Mafia**. Key features include:
+
+- ⚡ Full backend support using **FastAPI**  
+- 🗄 Integration with **PostgreSQL** via SQLAlchemy  
+- 🛠 CRUD operations for all main models: events, players, media, rules, and game cards  
+- 📁 File upload and storage for images and PDFs  
+- 🔗 REST API endpoints for all operations  
+
+The website is fully **responsive**, providing an intuitive and user-friendly interface on mobile and desktop devices.
+
+---
+
+## 🛠 Technologies Used
+
+- **Backend:** FastAPI, Python  
+- **Database:** PostgreSQL (via SQLAlchemy ORM)  
+- **Frontend:** React, HTML, CSS, JavaScript  
 - **Hosting:** Render  
 
 ---
 
-## Key Features
+## ⭐ Key Features
 
-1. **User Management:**
-   - Registration and authentication.
-   - User profiles and personal statistics.
+### 👤 User Management
+- User profiles and personal statistics  
+- Secure registration with password hashing (bcrypt)
 
-2. **Gameplay:**
-   - Create and configure game rooms.
-   - Play in real-time with other players.
-   - Integrated chat for communication.
+### 🎮 Gameplay
+- Create and configure game rooms  
+- Real-time gameplay with multiple players  
+- Integrated chat for player communication  
 
-3. **Analytics:**
-   - Player leaderboard.
-   - Game statistics and achievements tracking.
-
----
-
-## Project Structure
-
-/src
-/client # Frontend application
-/server # Backend API and real-time server
-README.md
-package.json
+### 📊 Analytics
+- Player leaderboard  
+- Game statistics and achievements tracking  
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 To run the project locally:
 
-1. Clone the repository:
+**Clone the repository:**
 
 ```bash
-git clone https://github.com/Yuliia-Fil/Mate-Mafia-Club/.git
+git clone https://github.com/Yuliia-Fil/Mate-Mafia-Club.git
 cd mafia-club
+
+👩‍💻 Team & Contact
+
+Backend Developer: Alena Tsapenko
+
+Frontend & Design: Yuliia Fil
+
+Email: alena.tsapenko7@gmail.com
+
+GitHub: https://github.com/TsapenkoA
