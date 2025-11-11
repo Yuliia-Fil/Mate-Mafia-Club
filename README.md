@@ -51,38 +51,18 @@ The website is fully **responsive**, providing an intuitive and user-friendly in
 
 To run the project locally:
 
-1. **Clone the repository**
+## **Clone the repository**
 
    ```bash
    git clone https://github.com/Yuliia-Fil/Mate-Mafia-Club.git
    cd mafia-club
 
-2. **Install backend dependencies**
+## 👩‍💻 Team & Contact
 
-```pip install -r requirements.txt
+- Backend Developer: Alena Tsapenko
 
+- Frontend & Design: Yuliia Fil
 
-3. **Start the backend server**
+- 📧 Email: alena.tsapenko7@gmail.com
 
-``uvicorn main:app --reload
-
-
-4. Start the frontend (if needed)
-
-``npm run client
-
-
-5. Open in browser
-
-http://localhost:3000
-
-
-**👩‍💻 Team & Contact**
-
-Backend Developer: Alena Tsapenko
-
-Frontend & Design: Yuliia Fil
-
-📧 Email: alena.tsapenko7@gmail.com
-
-💻 GitHub: https://github.com/TsapenkoA
+- 💻 GitHub: https://github.com/TsapenkoA
