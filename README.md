@@ -53,16 +53,16 @@ To run the project locally:
 
 ## **Clone the repository**
 
-   ```bash
+   `bash
    git clone https://github.com/Yuliia-Fil/Mate-Mafia-Club.git
-   cd mafia-club
+   cd mafia-club `
 
-## 👩‍💻 Team & Contact
+# 👩‍💻 Team & Contact
 
 - Backend Developer: Alena Tsapenko
 
 - Frontend & Design: Yuliia Fil
 
-- 📧 Email: alena.tsapenko7@gmail.com
+- 📧 Email: (alena.tsapenko7@gmail.com)
 
-- 💻 GitHub: https://github.com/TsapenkoA
+- 💻 GitHub: (https://github.com/TsapenkoA)
